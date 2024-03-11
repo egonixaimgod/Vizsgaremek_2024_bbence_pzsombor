@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 class PaymentController extends Controller
 {
     /**
@@ -14,7 +17,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payment = Payment::all();
+
+        return response()->json($payment);
     }
 
     /**

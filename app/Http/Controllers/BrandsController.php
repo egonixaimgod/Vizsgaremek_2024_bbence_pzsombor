@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBrandsRequest;
 use App\Http\Requests\UpdateBrandsRequest;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 class BrandsController extends Controller
 {
     /**
@@ -14,7 +17,9 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brands::all();
+
+        return response()->json($brands);
     }
 
     /**

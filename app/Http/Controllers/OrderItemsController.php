@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderItemsRequest;
 use App\Http\Requests\UpdateOrderItemsRequest;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 class OrderItemsController extends Controller
 {
     /**
@@ -14,7 +17,9 @@ class OrderItemsController extends Controller
      */
     public function index()
     {
-        //
+        $order_items = OrderItems::all();
+
+        return response()->json($order_items);
     }
 
     /**

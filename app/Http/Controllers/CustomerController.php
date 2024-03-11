@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 class CustomerController extends Controller
 {
     /**
@@ -14,7 +17,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Customer::all();
+
+        return response()->json($customer);
     }
 
     /**
