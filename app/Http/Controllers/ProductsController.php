@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 use App\Models\Products;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductsRequest;
@@ -14,7 +17,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products = Products::all();
+
+        return response()->json($products);
     }
 
     /**

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model
 {
-    use HasFactory;
+    protected $fillable = ['status', 'billed_date', 'paid_date'];
 }

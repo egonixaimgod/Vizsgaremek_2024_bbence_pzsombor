@@ -20,7 +20,7 @@ class CustomerFactory extends Factory
     {
         $name = $this->faker->name();
         $email = $this->faker->email();
-        $password = static::$password ??= Hash::make('password');
+        $password = Str::random(10);
         $address = Str::random(10);
         $county = $this->faker->randomElement(['Kecskemét', 'Pécs', 'Békéscsaba', 'Miskolc', 'Szeged', 'Székesfehérvár', 'Győr', 'Debrecen', 'Eger', 'Szolnok', 'Tatabánya', 'Salgótarján', 'Budapest', 'Kaposvár', 'Nyíregyháza', 'Szekszárd', 'Szombathely', 'Veszprém', 'Zalaegerszeg']);
         $city = $this->faker->randomElement(['Bács-Kiskun', 'Baranya', 'Békés', 'Borsod-Abaúj-Zemplén', 'Csongrád-Csanád', 'Fejér', 'Győr-Moson-Sopron', 'Hajdú-Bihar', 'Heves', 'Jász-Nagykun-Szolnok', 'Komárom-Esztergom', 'Nógrád', 'Pest', 'Somogy', 'Szabolcs-Szatmár-Beger', 'Tolna', 'Vas', 'Veszprém', 'Zala']);

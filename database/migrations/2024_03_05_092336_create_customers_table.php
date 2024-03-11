@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('postal_code');
             $table->string('phone')->nullable();
-            $table->integer('admin'); //0 vagy 1
+            $table->string('admin'); //false or true
             $table->timestamps();
         });
     }
