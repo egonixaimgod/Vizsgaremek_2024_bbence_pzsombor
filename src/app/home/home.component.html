@@ -1,7 +1,7 @@
 <div class="container px-5">
-    <div class="row align-items-center mt-5">
+    <div class="row align-items-center py-5">
         <!--carousel!-->
-        <div class="col">
+        <div class="col-lg">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 100%">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
@@ -35,16 +35,17 @@
             </div>
         </div>
         <!--carousel!-->
-        <div class="col-lg py-5">
+        <div class="col-lg">
             <h1 class="font-weight-light">PCY Webshop</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur error ut adipisci natus a? Repellat
-                enim rem, maiores culpa expedita architecto illo amet delectus debitis tempore, quibusdam saepe
-                temporibus vitae?</p>
-            <a class="btn btn-primary" routerLink="/about">Rólunk</a>
+            <p>Üdvözlünk a PC Webshopon! Cégünk azért jött létre, hogy megkönnyítsük
+                számodra a számítástechnikai termékek beszerzését és segítsünk
+                megtalálni az igényeidnek és költségvetésednek legmegfelelőbb
+                megoldást.</p>
+            <a class="btn btn-warning" routerLink="/about">Rólunk</a>
         </div>
     </div>
     <!--mobilban a padding fos geci!-->
-    <div class="card text-white bg-secondary my-5 py-4 text-center">
+    <div class="card text-white bg-secondary py-4 text-center">
         <div class="card-body">
             <p class="text-white ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam illo numquam
                 assumenda non vitae quae quod corrupti, a nihil dolorem!</p>
@@ -53,49 +54,18 @@
 </div>
 
 <!--2. resz!-->
-<div class="container px-5">
+<div class="container px-5 py-5">
     <div class="row">
-        <div class="col-md-4 mb-5">
+        <div class="col" *ngFor="let product of products.slice(0,3), let i = index">
             <div class="card h-100">
                 <div class="card-body">
-                    <h2 class="card-title">AMD Ryzen 5 5600X</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Rem magni
-                        quas
-                        ex
-                        numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    <h2 class="card-title">{{product.name}}</h2>
+                    <h5 class="card-text">Példányszám: {{product.amount}} <br> Ár: {{product.cost}} Ft
+                    </h5>
                 </div>
-                <img src="assets/images/Ryzen_5_5600X.jpg" class="card-img-bottom" alt="AMD Ryzen 5 5600X" style="">
-                <div class="card-footer"><a class="btn btn-primary btn-sm" routerLink="/cart">Rendeld meg!</a></div>
+                <img [src]="generateImagePath(product.name)" class="card-img-bottom" alt="AMD Ryzen 5 5600X" style="">
+                <div class="card-footer">
+                    <a class="btn btn-warning" (click)="onAddToCart(product)" routerLink="/cart">Rendeld meg!</a>
+                </div>
             </div>
         </div>
-        <!-- Intel i5-12400F kártya és képe -->
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Intel i5-12400F</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quod tenetur ex natus
-                        at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates
-                        quos eligendi labore.</p>
-                </div>
-                <img src="assets/images/i5_12400F.jpg" class="card-img-bottom " alt="Intel i5-12400F"
-                    style="padding: 8vh;">
-                <div class="card-footer"><a class="btn btn-primary btn-sm" routerLink="/cart">Rendeld meg!</a></div>
-            </div>
-        </div>
-        <!-- AMD Ryzen 7 7800X3D kártya és képe -->
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">AMD Ryzen 7 7800X3D</h2>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt porro nisi
-                        est quos facere magnam! Mollitia quo laborum autem distinctio?</p>
-                </div>
-                <img src="assets/images/Ryzen_7_7800X3D.jpg" class="card-img-bottom" alt="AMD Ryzen 7 7800X3D"
-                    style="padding: 7vh;">
-                <div class="card-footer"><a class="btn btn-primary btn-sm" routerLink="/cart">Rendeld meg!</a></div>
-            </div>
-        </div>
-    </div>
-</div>
