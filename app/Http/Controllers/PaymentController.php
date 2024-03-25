@@ -17,9 +17,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payment = Payment::all();
+        $payments = Payment::all();
 
-        return response()->json($payment);
+        return response()->json($payments);
     }
 
     /**
@@ -35,7 +35,8 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
-        //
+        $payment = Payment::create($request->all());
+        return response()->json($payment, Response::HTTP_CREATED);
     }
 
     /**
@@ -43,7 +44,7 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
-        //
+        return response()->json($payment);
     }
 
     /**
@@ -59,7 +60,8 @@ class PaymentController extends Controller
      */
     public function update(UpdatePaymentRequest $request, Payment $payment)
     {
-        //
+        $payment->update($request->all());
+        return response()->json($payment, Response::HTTP_OK);
     }
 
     /**
@@ -67,6 +69,7 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
-        //
+        $payment->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

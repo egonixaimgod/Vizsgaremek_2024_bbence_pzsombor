@@ -17,9 +17,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customer = Customer::all();
+        $customers = Customer::all();
 
-        return response()->json($customer);
+        return response()->json($customers);
     }
 
     /**
@@ -35,7 +35,8 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+        $customer = Customer::create($request->all());
+        return response()->json($customer, Response::HTTP_CREATED);
     }
 
     /**
@@ -43,7 +44,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return response()->json($customer);
     }
 
     /**
@@ -59,7 +60,8 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        $customer->update($request->all());
+        return response()->json($customer, Response::HTTP_OK);
     }
 
     /**
@@ -67,6 +69,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

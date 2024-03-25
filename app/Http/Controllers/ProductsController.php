@@ -35,7 +35,8 @@ class ProductsController extends Controller
      */
     public function store(StoreProductsRequest $request)
     {
-        //
+        $product = Products::create($request->all());
+        return response()->json($product, Response::HTTP_CREATED);
     }
 
     /**
@@ -43,7 +44,7 @@ class ProductsController extends Controller
      */
     public function show(Products $products)
     {
-        //
+        return response()->json($products);
     }
 
     /**
@@ -59,7 +60,8 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductsRequest $request, Products $products)
     {
-        //
+        $products->update($request->all());
+        return response()->json($products, Response::HTTP_OK);
     }
 
     /**
@@ -67,6 +69,7 @@ class ProductsController extends Controller
      */
     public function destroy(Products $products)
     {
-        //
+        $products->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

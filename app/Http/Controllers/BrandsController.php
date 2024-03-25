@@ -35,7 +35,8 @@ class BrandsController extends Controller
      */
     public function store(StoreBrandsRequest $request)
     {
-        //
+        $brand = Brands::create($request->all());
+        return response()->json($brand, Response::HTTP_CREATED);
     }
 
     /**
@@ -43,7 +44,7 @@ class BrandsController extends Controller
      */
     public function show(Brands $brands)
     {
-        //
+        return response()->json($brands);
     }
 
     /**
@@ -59,7 +60,8 @@ class BrandsController extends Controller
      */
     public function update(UpdateBrandsRequest $request, Brands $brands)
     {
-        //
+        $brands->update($request->all());
+        return response()->json($brands, Response::HTTP_OK);
     }
 
     /**
@@ -67,6 +69,7 @@ class BrandsController extends Controller
      */
     public function destroy(Brands $brands)
     {
-        //
+        $brands->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

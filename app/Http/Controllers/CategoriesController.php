@@ -35,7 +35,8 @@ class CategoriesController extends Controller
      */
     public function store(StoreCategoriesRequest $request)
     {
-        //
+        $category = Categories::create($request->all());
+        return response()->json($category, Response::HTTP_CREATED);
     }
 
     /**
@@ -43,7 +44,7 @@ class CategoriesController extends Controller
      */
     public function show(Categories $categories)
     {
-        //
+        return response()->json($categories);
     }
 
     /**
@@ -59,7 +60,8 @@ class CategoriesController extends Controller
      */
     public function update(UpdateCategoriesRequest $request, Categories $categories)
     {
-        //
+        $categories->update($request->all());
+        return response()->json($categories, Response::HTTP_OK);
     }
 
     /**
@@ -67,6 +69,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Categories $categories)
     {
-        //
+        $categories->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

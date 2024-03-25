@@ -35,7 +35,8 @@ class OrdersController extends Controller
      */
     public function store(StoreOrdersRequest $request)
     {
-        //
+        $order = Orders::create($request->all());
+        return response()->json($order, Response::HTTP_CREATED);
     }
 
     /**
@@ -43,7 +44,7 @@ class OrdersController extends Controller
      */
     public function show(Orders $orders)
     {
-        //
+        return response()->json($orders);
     }
 
     /**
@@ -59,7 +60,8 @@ class OrdersController extends Controller
      */
     public function update(UpdateOrdersRequest $request, Orders $orders)
     {
-        //
+        $orders->update($request->all());
+        return response()->json($orders, Response::HTTP_OK);
     }
 
     /**
@@ -67,6 +69,7 @@ class OrdersController extends Controller
      */
     public function destroy(Orders $orders)
     {
-        //
+        $orders->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

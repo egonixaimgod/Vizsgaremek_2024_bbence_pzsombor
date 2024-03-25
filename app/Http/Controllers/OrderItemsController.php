@@ -17,9 +17,9 @@ class OrderItemsController extends Controller
      */
     public function index()
     {
-        $order_items = OrderItems::all();
+        $orderItems = OrderItems::all();
 
-        return response()->json($order_items);
+        return response()->json($orderItems);
     }
 
     /**
@@ -35,7 +35,8 @@ class OrderItemsController extends Controller
      */
     public function store(StoreOrderItemsRequest $request)
     {
-        //
+        $orderItem = OrderItems::create($request->all());
+        return response()->json($orderItem, Response::HTTP_CREATED);
     }
 
     /**
@@ -43,7 +44,7 @@ class OrderItemsController extends Controller
      */
     public function show(OrderItems $orderItems)
     {
-        //
+        return response()->json($orderItems);
     }
 
     /**
@@ -59,7 +60,8 @@ class OrderItemsController extends Controller
      */
     public function update(UpdateOrderItemsRequest $request, OrderItems $orderItems)
     {
-        //
+        $orderItems->update($request->all());
+        return response()->json($orderItems, Response::HTTP_OK);
     }
 
     /**
@@ -67,6 +69,7 @@ class OrderItemsController extends Controller
      */
     public function destroy(OrderItems $orderItems)
     {
-        //
+        $orderItems->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
