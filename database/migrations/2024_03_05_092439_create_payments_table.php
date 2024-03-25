@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('status'); // Billed, Paid, Void
-            $table->dateTime('billed_date');
-            $table->dateTime('paid_date')->nullable();
+            $table->string('status'); // Billed or Paid
             $table->timestamps();
         });
     }

@@ -2,16 +2,20 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Payment;
 
 class PaymentSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        //
+        $payments = [
+            ['status' => 'Billed'],
+            ['status' => 'Paid'],
+        ];
+
+        foreach ($payments as $paymentData) {
+            Payment::create($paymentData);
+        }
     }
 }

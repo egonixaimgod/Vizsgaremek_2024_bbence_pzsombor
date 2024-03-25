@@ -30,6 +30,9 @@ class DatabaseSeeder extends Seeder
        OrdersSeeder::class,
        OrderItemsSeeder::class,
        BrandsSeeder::class,
+       CategoriesSeeder::class,
+       PaymentSeeder::class,
+       ProductsSeeder::class
    ]);
     }
 }
