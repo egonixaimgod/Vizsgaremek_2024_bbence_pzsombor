@@ -2,16 +2,23 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Brands;
 
 class BrandsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        //
+        $brands = [
+            ['name' => 'Intel'],
+            ['name' => 'Amd'],
+            ['name' => 'G.Skill'],
+            ['name' => 'Gigabyte'],
+            ['name' => 'MSI'],
+        ];
+
+        foreach ($brands as $brandData) {
+            Brands::create($brandData);
+        }
     }
 }
