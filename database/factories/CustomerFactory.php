@@ -22,8 +22,8 @@ class CustomerFactory extends Factory
         $email = $this->faker->email();
         $password = Str::random(10);
         $address = Str::random(10);
-        $county = $this->faker->randomElement(['Kecskemét', 'Pécs', 'Békéscsaba', 'Miskolc', 'Szeged', 'Székesfehérvár', 'Győr', 'Debrecen', 'Eger', 'Szolnok', 'Tatabánya', 'Salgótarján', 'Budapest', 'Kaposvár', 'Nyíregyháza', 'Szekszárd', 'Szombathely', 'Veszprém', 'Zalaegerszeg']);
-        $city = $this->faker->randomElement(['Bács-Kiskun', 'Baranya', 'Békés', 'Borsod-Abaúj-Zemplén', 'Csongrád-Csanád', 'Fejér', 'Győr-Moson-Sopron', 'Hajdú-Bihar', 'Heves', 'Jász-Nagykun-Szolnok', 'Komárom-Esztergom', 'Nógrád', 'Pest', 'Somogy', 'Szabolcs-Szatmár-Beger', 'Tolna', 'Vas', 'Veszprém', 'Zala']);
+        $city = $this->faker->randomElement(['Kecskemét', 'Pécs', 'Békéscsaba', 'Miskolc', 'Szeged', 'Székesfehérvár', 'Győr', 'Debrecen', 'Eger', 'Szolnok', 'Tatabánya', 'Salgótarján', 'Budapest', 'Kaposvár', 'Nyíregyháza', 'Szekszárd', 'Szombathely', 'Veszprém', 'Zalaegerszeg']);
+        $county = $this->faker->randomElement(['Bács-Kiskun', 'Baranya', 'Békés', 'Borsod-Abaúj-Zemplén', 'Csongrád-Csanád', 'Fejér', 'Győr-Moson-Sopron', 'Hajdú-Bihar', 'Heves', 'Jász-Nagykun-Szolnok', 'Komárom-Esztergom', 'Nógrád', 'Pest', 'Somogy', 'Szabolcs-Szatmár-Beger', 'Tolna', 'Vas', 'Veszprém', 'Zala']);
         $postal_code = $this->faker->numberBetween(1000, 9999);
         $phone = Str::random(10);
 
