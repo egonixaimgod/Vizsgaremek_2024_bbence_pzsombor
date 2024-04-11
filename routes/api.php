@@ -28,8 +28,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//register
-Route::post('/register', [AuthController::class, 'register']);//szar
+//auth
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
 
 //brands
 Route::get('/brands', [BrandsController::class, 'index']);
