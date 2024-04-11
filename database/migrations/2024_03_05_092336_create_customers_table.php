@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('county');
             $table->string('city');
             $table->string('postal_code');
-            $table->string('phone')->nullable();
+            $table->string('phone');
             $table->string('admin'); //false or true
             $table->timestamps();
         });

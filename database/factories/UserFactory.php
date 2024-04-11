@@ -23,11 +23,25 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->name();
+        $email = $this->faker->email();
+        $password = Str::random(10);
+        $address = Str::random(10);
+        $city = $this->faker->randomElement(['Kecskemét', 'Pécs', 'Békéscsaba', 'Miskolc', 'Szeged', 'Székesfehérvár', 'Győr', 'Debrecen', 'Eger', 'Szolnok', 'Tatabánya', 'Salgótarján', 'Budapest', 'Kaposvár', 'Nyíregyháza', 'Szekszárd', 'Szombathely', 'Veszprém', 'Zalaegerszeg']);
+        $postal_code = $this->faker->numberBetween(1000, 9999);
+        $phone = Str::random(10);
+
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $name,
+            'email' => $email,
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'address' => $address,
+            'city' => $city,
+            'postal_code' => $postal_code,
+            'phone' => $phone,
+            'admin' => false,
             'remember_token' => Str::random(10),
         ];
     }

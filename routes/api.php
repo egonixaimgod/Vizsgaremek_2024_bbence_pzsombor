@@ -28,6 +28,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post("/auth/logout", [AuthController::class, "logout"]);
+    Route::get('/auth/user',[AuthController::class, 'user']);
+});
+
+
+
 //auth
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
@@ -47,11 +54,11 @@ Route::put('/categories/{category}', [CategoriesController::class, 'update']);
 Route::delete('/categories/{category}', [CategoriesController::class, 'destroy']);
 
 //customer
-Route::get('/customer', [CustomerController::class, 'index']);
-Route::post('/customer', [CustomerController::class, 'store']);
-Route::get('/customer/{customer}', [CustomerController::class, 'show']);
-Route::put('/customer/{customer}', [CustomerController::class, 'update']);
-Route::delete('/customer/{customer}', [CustomerController::class, 'destroy']);
+Route::get('/user', [CustomerController::class, 'index']);
+Route::post('/user', [CustomerController::class, 'store']);
+Route::get('/user/{user}', [CustomerController::class, 'show']);
+Route::put('/user/{user}', [CustomerController::class, 'update']);
+Route::delete('/user/{user}', [CustomerController::class, 'destroy']);
 
 //order_items
 Route::get('/order_items', [OrderItemsController::class, 'index']);

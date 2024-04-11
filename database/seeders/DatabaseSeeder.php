@@ -13,20 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Customer::factory()->create([
+        \App\Models\User::factory()->create([
             'name' => 'admin',
             'email' => '',
             'password' => 'admin',
             'address' => '',
-            'county' => '',
             'city' => '',
             'postal_code' => 0,
             'phone' => '',
-            'admin' => 'true'
+            'admin' => true
         ]);
 
    $this->call([
-       CustomerSeeder::class,
        OrdersSeeder::class,
        OrderItemsSeeder::class,
        BrandsSeeder::class,
