@@ -13,7 +13,6 @@ export class SignupComponent {
     password: '',
     confirm_password: '',
     address: '',
-    county: '',
     city: '',
     postal_code: '',
     phone: ''
