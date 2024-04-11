@@ -20,27 +20,24 @@ class AuthController extends Controller
             'password' => 'required|min:6|max:100',
             'confirm_password' => 'required|same:password',
             'address' => 'required|min:5|max:100',
-            //'county' => 'required|min:2|max:50',
             'city' => 'required|min:2|max:50',
             'postal_code' => 'required|min:4|max:4',
             'phone' => 'required|min:3|max:12',
-            'admin' => false
         ]);
-
+    
         if ($validator->fails()) {
             return response()->json([
                 'message'=>'Validations fails',
                 'errors'=>$validator->errors()
             ], 422);
         }
-
+    
         $user=User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'address'=>$request->address,
             'city'=>$request->city,
-            //'county'=>$request->county,
             'postal_code'=>$request->postal_code,
             'phone'=>$request->phone,
             'admin'=>false
@@ -50,7 +47,7 @@ class AuthController extends Controller
             'message'=>'Registration succesful',
             'data'=>$user
         ],200);
-    }
+    }    
 
     public function login(Request $request){
         $validator = Validator::make($request->all(), [
@@ -96,11 +93,16 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
-        $request->user()->tokens()->delete();
-
-        return response()->json([
-            'message' => 'User successfully logged out',
-        ], 200);
+        if ($request->user()) {
+            $request->user()->tokens()->delete();
+            return response()->json([
+                'message' => 'User successfully logged out',
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'No user authenticated',
+            ], 401);
+        }
     }
 
 }
