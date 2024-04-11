@@ -1,17 +1,15 @@
 <div style="padding-top: 3rem; padding-bottom: 3rem; padding-left: 40rem; padding-right: 40rem;">
     <h1>Bejelentkezés</h1>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Email cím</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <label for="email" class="form-label">Email cím</label>
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="userData.email">
     </div>
     <div class="py-2">
-        <label for="exampleInputPassword1" class="form-label">Jelszó</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label for="password" class="form-label">Jelszó</label>
+        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="userData.password">
     </div>
-    <div class="py-2 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Emlékezz</label>
-    </div>
-    <button type="submit" class="btn btn btn-warning ">Tovább</button>
+
+    <div style="text-align: right;">
+        <button type="submit" class="btn btn-warning" routerLink="/login" (click)="login()">Tovább</button>
+        </div>
 </div>

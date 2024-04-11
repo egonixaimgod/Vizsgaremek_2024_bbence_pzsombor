@@ -1,51 +1,43 @@
 <div style="padding-top: 3rem; padding-bottom: 3rem; padding-left: 40rem; padding-right: 40rem;">
     <h1>Regisztráció</h1>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Név</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text"></div>
+        <label for="name" class="form-label">Név</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="userData.name">
     </div>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Email cím</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text"></div>
+        <label for="email" class="form-label">Email cím</label>
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="userData.email">
     </div>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Jelszó</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text"></div>
+        <label for="password" class="form-label">Jelszó</label>
+        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="userData.password">
     </div>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Jelszó újra</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text"></div>
+        <label for="confirmPassword" class="form-label">Jelszó újra</label>
+        <input type="password" class="form-control" id="confirmPassword" name="confirm_password" [(ngModel)]="userData.confirm_password">
     </div>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Cím</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text"></div>
+        <label for="address" class="form-label">Cím</label>
+        <input type="text" class="form-control" id="address" name="address" [(ngModel)]="userData.address">
     </div>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Megye</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text"></div>
+        <label for="county" class="form-label">Megye</label>
+        <input type="text" class="form-control" id="county" name="county" [(ngModel)]="userData.county">
     </div>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Város</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text"></div>
+        <label for="city" class="form-label">Város</label>
+        <input type="text" class="form-control" id="city" name="city" [(ngModel)]="userData.city">
     </div>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Irányítószám</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text"></div>
+        <label for="postal_code" class="form-label">Irányítószám</label>
+        <input type="text" class="form-control" id="postal_code" name="postal_code" [(ngModel)]="userData.postal_code">
     </div>
     <div class="py-2">
-        <label for="exampleInputEmail1" class="form-label">Telcsi</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text"></div>
+        <label for="phone" class="form-label">Telefonszám</label>
+        <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="userData.phone">
     </div>
+
     <div style="text-align: right;">
-    <button type="submit" class="btn btn-warning">Tovább</button>
+    <button type="submit" class="btn btn-warning" routerLink="/login" (click)="register()">Tovább</button>
     </div>
 </div>
