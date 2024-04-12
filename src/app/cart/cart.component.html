@@ -1,29 +1,15 @@
-<div class="container px-5 py-5">
-    <div>
-        <h2>Kosár tartalma</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Név</th>
-                    <th scope="col">Ár</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of cartItems">
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.cost }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container px-5 py-2">
+    
     <div class="row">
-        <div class="col-md-auto py-3" *ngFor="let item of cartItems">
+        <div class="col-md-auto py-2" *ngFor="let item of cartItems">
             <div class="card" style="width: 18rem; height: 28rem;">
                 <img [src]="generateImagePath(item.name)" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{item.name}}</h5>
                     <p class="card-text">Ár: {{item.cost}} Ft<br>
                         Példányszám: {{item.amount}}</p>
+                        <button class="btn btn-danger" (click)="removeFromCart(item)">Törlés</button> <!-- Új gomb -->
+                
                 </div>
             </div>
         </div>

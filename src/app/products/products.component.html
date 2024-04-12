@@ -1,32 +1,9 @@
-<div class="container px-5 py-5">
+<div class="container px-5 pt-5">
     <h1>Termékek</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Kategória Id</th>
-                <th scope="col">Brand Id</th>
-                <th scope="col">Név</th>
-                <th scope="col">Ár</th>
-                <th scope="col">Példányszám</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of products">
-                <td>{{ product.id }}</td>
-                <td>{{ product.category_id }}</td>
-                <td>{{ product.brand_id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.cost }}</td>
-                <td>{{ product.amount }}</td>
-            </tr>
-        </tbody>
-    </table>
 </div>
-
 <div class="container px-5">
     <div class="row">
-        <div class="col-md-4 pb-5" *ngFor="let product of products, let i = index">
+        <div class="col-md-4 py-3" *ngFor="let product of products, let i = index">
             <div class="card h-100">
                 <div class="card-body">
                     <h2 class="card-title">{{product.name}}</h2>

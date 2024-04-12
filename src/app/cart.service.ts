@@ -15,4 +15,8 @@ export class CartService {
   getCartItems(): any[] {
     return this.cartItems;
   }
+
+  removeFromCart(index: number): void {
+    this.cartItems.splice(index, 1);
+  }
 }

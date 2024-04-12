@@ -16,4 +16,9 @@ export class CartComponent {
   generateImagePath(productName: string): string {
     return `assets/images/${productName}.jpg`;
   }
+
+  removeFromCart(index: number): void {
+    this.cartService.removeFromCart(index);
+    this.totalPrice = this.cartItems.reduce((total, item) => total + parseInt(item.cost), 0);
+  }
 }
