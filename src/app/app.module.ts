@@ -14,6 +14,7 @@ import { AboutComponent } from './about/about.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ChooseComponent } from './choose/choose.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SignupComponent } from './signup/signup.component';
     CartComponent,
     LoginComponent,
     SignupComponent,
+    ChooseComponent,
   ],
   imports: [
     BrowserModule,

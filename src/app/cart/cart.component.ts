@@ -21,4 +21,6 @@ export class CartComponent {
     this.cartService.removeFromCart(index);
     this.totalPrice = this.cartItems.reduce((total, item) => total + parseInt(item.cost), 0);
   }
+
+  next() {alert("Válasszon szállítási módot!");}
 }

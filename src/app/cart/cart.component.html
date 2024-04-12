@@ -8,7 +8,7 @@
                     <h5 class="card-title">{{item.name}}</h5>
                     <p class="card-text">Ár: {{item.cost}} Ft<br>
                         Példányszám: {{item.amount}}</p>
-                        <button class="btn btn-danger" (click)="removeFromCart(item)">Törlés</button> <!-- Új gomb -->
+                        <button class="btn btn-danger" (click)="removeFromCart(item)">Törlés</button>
                 
                 </div>
             </div>
@@ -21,7 +21,7 @@
             <h1>Összesen: {{totalPrice}} Ft </h1>
         </div>
         <div class="col" style="text-align: right;">
-            <a href=" #" class="btn btn-warning btn-lg">Tovább!</a>
+            <a routerLink="/choose" class="btn btn-warning btn-lg" (click)=next()>Tovább!</a>
         </div>
     </div>
 </div>

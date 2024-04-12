@@ -19,11 +19,11 @@ export class LoginComponent {
     this.http.post('http://127.0.0.1:8000/api/auth/login', this.userData)
       .subscribe((response) => {
         console.log('Bejelentkezés sikeres:', response);
-        alert("A bejelentkezés sikeres! :)");
+        alert("A bejelentkezés sikeres!");
         this.authService.isLoggedIn = true;
       }, (error) => {
         console.error('Bejelentkezés sikertelen:', error);
-        alert("A bejelentkezés sikertelen! :(");
+        alert("A bejelentkezés sikertelen!");
       });
   }
 }
