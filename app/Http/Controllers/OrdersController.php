@@ -17,9 +17,9 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Orders::all();
+        $order = Orders::all();
 
-        return response()->json($orders);
+        return response()->json($order);
     }
 
     /**
@@ -33,7 +33,7 @@ class OrdersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOrdersRequest $request)
+    public function store(Request $request)
     {
         $order = Orders::create($request->all());
         return response()->json($order, Response::HTTP_CREATED);
@@ -42,9 +42,15 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Orders $orders)
+    public function show($id)
     {
-        return response()->json($orders);
+        $order = Orders::find($id);
+
+        if ($order === null) {
+            return response()->json(['error' => 'A Rendelés nem található'], 404);
+        }
+
+        return response()->json($order);
     }
 
     /**
@@ -58,18 +64,29 @@ class OrdersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrdersRequest $request, Orders $orders)
+    public function update(Request $request, $id)//nem működik
     {
-        $orders->update($request->all());
-        return response()->json($orders, Response::HTTP_OK);
-    }
+        $order = Orders::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'customer_id' => 'required|exists:categories,id',
+            'payment_id' => 'required|exists:brands,id',
+            'order_date' => 'required|date_format:Y-m-d',
+        ]);
+    
+        $order->update($validatedData);
+        return response()->json($order, Response::HTTP_OK);
+}
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Orders $orders)
+    public function destroy($id)
     {
-        $orders->delete();
+        $order = Orders::findOrFail($id);
+
+        $order->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

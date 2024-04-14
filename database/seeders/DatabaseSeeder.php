@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory()->create([
             'name' => 'admin',
-            'email' => '',
+            'email' => 'admin@example.com',
             'password' => 'admin',
             'address' => '',
             'city' => '',
@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
    $this->call([
-       OrdersSeeder::class,
-       OrderItemsSeeder::class,
+       //OrdersSeeder::class,
+       //OrderItemsSeeder::class,
        BrandsSeeder::class,
        CategoriesSeeder::class,
        PaymentSeeder::class,

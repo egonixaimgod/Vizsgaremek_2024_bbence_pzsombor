@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProductsRequest;
-use App\Http\Requests\UpdateProductsRequest;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,9 +15,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Products::all();
+        $product = Products::all();
 
-        return response()->json($products);
+        return response()->json($product);
     }
 
     /**
@@ -33,7 +31,7 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductsRequest $request)
+    public function store(Request $request)
     {
         $product = Products::create($request->all());
         return response()->json($product, Response::HTTP_CREATED);
@@ -42,9 +40,15 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Products $products)
+    public function show($id)
     {
-        return response()->json($products);
+        $product = Products::find($id);
+
+        if ($product === null) {
+            return response()->json(['error' => 'A Termék nem található'], 404);
+        }
+
+        return response()->json($product);
     }
 
     /**
@@ -58,18 +62,30 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductsRequest $request, Products $products)
+    public function update(Request $request, $id)
     {
-        $products->update($request->all());
-        return response()->json($products, Response::HTTP_OK);
+        $product = Products::findOrFail($id);
+
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'brand_id' => 'required|exists:brands,id',
+            'name' => 'required|string',
+            'cost' => 'required|integer|min:0',
+            'amount' => 'required|integer|min:0',
+        ]);
+        
+        $product->update($request->all());
+        return response()->json($product, Response::HTTP_OK);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Products $products)
+    public function destroy($id)
     {
-        $products->delete();
+        $product = Products::findOrFail($id);
+
+        $product->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderItems;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreOrderItemsRequest;
-use App\Http\Requests\UpdateOrderItemsRequest;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,9 +15,9 @@ class OrderItemsController extends Controller
      */
     public function index()
     {
-        $orderItems = OrderItems::all();
+        $orderItem = OrderItems::all();
 
-        return response()->json($orderItems);
+        return response()->json($orderItem);
     }
 
     /**
@@ -33,7 +31,7 @@ class OrderItemsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOrderItemsRequest $request)
+    public function store(Request $request)
     {
         $orderItem = OrderItems::create($request->all());
         return response()->json($orderItem, Response::HTTP_CREATED);
@@ -42,9 +40,15 @@ class OrderItemsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OrderItems $orderItems)
+    public function show($id)
     {
-        return response()->json($orderItems);
+        $orderItem = OrderItems::find($id);
+
+        if ($orderItem === null) {
+            return response()->json(['error' => 'A Rendelt termék nem található'], 404);
+        }
+
+        return response()->json($orderItem);
     }
 
     /**
@@ -58,18 +62,30 @@ class OrderItemsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrderItemsRequest $request, OrderItems $orderItems)
+    public function update(Request $request, $id)//nem működik
     {
-        $orderItems->update($request->all());
-        return response()->json($orderItems, Response::HTTP_OK);
-    }
+        $orderItem = OrderItems::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'order_id' => 'required|exists:orders,id',
+            'product_id' => 'required|exists:products,id',
+            'amount' => 'required|integer|min:0'
+        ]);
+    
+        $orderItem->update($validatedData);
+        return response()->json($orderItem, Response::HTTP_OK);
+}
+
+    
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrderItems $orderItems)
+    public function destroy($id)
     {
-        $orderItems->delete();
+        $orderItem = OrderItems::findOrFail($id);
+
+        $orderItem->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

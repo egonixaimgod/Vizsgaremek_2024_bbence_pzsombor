@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    protected $fillable = ['status', 'billed_date', 'paid_date'];
+    protected $fillable = ['status'];
 }

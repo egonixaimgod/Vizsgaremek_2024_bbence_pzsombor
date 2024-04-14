@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePaymentRequest;
-use App\Http\Requests\UpdatePaymentRequest;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -35,15 +34,20 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
-        $payment = Payment::create($request->all());
-        return response()->json($payment, Response::HTTP_CREATED);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Payment $payment)
+    public function show($id)
     {
+        $payment = Payment::find($id);
+
+        if ($payment === null) {
+            return response()->json(['error' => 'Fizetési mód nem található'], 404);
+        }
+
         return response()->json($payment);
     }
 
@@ -58,18 +62,16 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePaymentRequest $request, Payment $payment)
+    public function update()
     {
-        $payment->update($request->all());
-        return response()->json($payment, Response::HTTP_OK);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Payment $payment)
+    public function destroy()
     {
-        $payment->delete();
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+
     }
 }
