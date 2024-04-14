@@ -3,3 +3,11 @@ projekt készítése:  composer create-project laravel/laravel example-app
 modellek, controllerek, stb.. készítése: php artisan make:model Modelname --all
 migrate, seed: php artisan migrate:fresh --seed
 
+
+
+projekt elinditasa:
+
+composer i
+copy .env.example .env
+php artisan migrate:fresh --seed
+php artisan key:generate
