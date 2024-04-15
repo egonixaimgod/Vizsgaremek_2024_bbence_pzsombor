@@ -1,1 +1,11 @@
-<button (click)="order()"></button>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p *ngIf="OrderService.userData">
+                <strong>customerid:</strong> {{ OrderService.userData.customer_id}} <br>
+                <strong>paymentid:</strong> {{ OrderService.userData.payment_id }} <br>
+                <strong>Rendelés időpontja:</strong> {{ OrderService.userData.order_date }}
+            </p>
+        </div>
+    </div>
+</div> 

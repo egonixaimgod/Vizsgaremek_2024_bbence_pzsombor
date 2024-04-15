@@ -5,7 +5,7 @@ import { AuthService } from '../auth.service';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
-})
+}) 
 export class ProfileComponent {
   constructor(public authservice: AuthService) { }
 }

@@ -3,8 +3,9 @@
         <div class="col">
             <p *ngIf="authservice.userData">
                 <strong>Név:</strong> {{ authservice.userData.data.name }} <br>
-                <strong>Város:</strong> {{ authservice.userData.data.city }}
+                <strong>Város:</strong> {{ authservice.userData.data.city }}<br>
+                <strong>Tokenje:</strong> {{ authservice.token}} 
             </p>
         </div>
     </div>
-</div>
+</div> 
