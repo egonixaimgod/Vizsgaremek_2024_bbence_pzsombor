@@ -43,16 +43,21 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown" *ngIf="authService.isLoggedIn">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Profil
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Profil
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="#">Adatlapom</a></li>
-                      <li><a class="dropdown-item" href="#">Rendeléseim</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" *ngIf="authService.isLoggedIn" routerLink="/home" (click)="authService.isLoggedIn = false">Kijelentkezés</a></li>
+                        <li><a class="dropdown-item" routerLink="/profile">Adatlapom</a></li>
+                        <li><a class="dropdown-item" routerLink="/orders">Rendeléseim</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" *ngIf="authService.isLoggedIn" routerLink="/home"
+                                (click)="authService.isLoggedIn = false; authService.userData = {}">Kijelentkezés</a>
+                        </li>
                     </ul>
-                  </li>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/cart" routerLinkActive="active" ariaCurrentWhenActive="page">
                         Kosár

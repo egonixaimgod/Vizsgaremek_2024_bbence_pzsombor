@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p *ngIf="authservice.userData">
+                <strong>Név:</strong> {{ authservice.userData.data.name }} <br>
+                <strong>Város:</strong> {{ authservice.userData.data.city }}
+            </p>
+        </div>
+    </div>
+</div>

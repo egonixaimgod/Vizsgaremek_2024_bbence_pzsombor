@@ -10,7 +10,7 @@
                         aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
-                </div> 
+                </div>
                 <div class="carousel-inner rounded">
                     <div class="carousel-item active">
                         <img src="assets/images/slider1.png" class="d-block w-100" alt="...">
@@ -46,19 +46,20 @@
     </div>
     <div class="asd">HAVI TOP TERMÉKEK</div>
 
-<!--2. resz!-->
-<div class="container px-5 py-5">
-    <div class="row">
-        <div class="col" *ngFor="let product of products.slice(0,3), let i = index">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">{{product.name}}</h2>
-                    <h5 class="card-text">Példányszám: {{product.amount}} <br> Ár: {{product.cost}} Ft
-                    </h5>
-                </div>
-                <img [src]="generateImagePath(product.name)" class="card-img-bottom" alt="AMD Ryzen 5 5600X" style="">
-                <div class="card-footer">
-                    <a class="btn btn-warning" (click)="onAddToCart(product)" routerLink="/cart">Rendeld meg!</a>
+    <!--2. resz!-->
+    <div class="container px-5 py-5">
+        <div *ngIf="products" class="row">
+            <div class="col" *ngFor="let product of products.slice(0,3), let i = index">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">{{product.name}}</h2>
+                        <h5 class="card-text">Példányszám: {{product.amount}} <br> Ár: {{product.cost}} Ft
+                        </h5>
+                    </div>
+                    <img [src]="generateImagePath(product.name)" class="card-img-bottom" alt="AMD Ryzen 5 5600X"
+                        style="">
+                    <div class="card-footer">
+                        <a class="btn btn-warning" (click)="onAddToCart(product)" routerLink="/cart">Rendeld meg!</a>
+                    </div>
                 </div>
             </div>
-        </div>
