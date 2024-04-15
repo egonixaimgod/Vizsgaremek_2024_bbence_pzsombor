@@ -19,7 +19,7 @@ export class ChooseComponent {
   userDataItems:any = {
     order_id: '5',
     product_id: '6',
-    amount: '88' 	
+    amount: '88'
   }
 
   constructor(private http: HttpClient, public OrderService: OrderService, private AuthService: AuthService, public OrderItemsService: OrderItemsService) { }
@@ -35,6 +35,8 @@ export class ChooseComponent {
   }
 
   order2() {
+    if (this.AuthService.isLoggedIn == true) {
     this.OrderItemsService.orderItems(this.userDataItems);
   }
+}
 }
