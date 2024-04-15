@@ -24,10 +24,10 @@ export class SignupComponent {
     this.http.post('http://127.0.0.1:8000/api/auth/register', this.userData)
       .subscribe((response) => {
         console.log('Regisztráció sikeres:', response);
-        alert("Gratulálok! Sikeres regiszráció! :)");
+        alert("Gratulálok! Sikeres regiszráció!");
       }, (error) => {
         console.error('Regisztráció sikertelen:', error);
-        alert("Sajnos hibás regisztráció, ellenőrizd az adataid! :(");
+        alert("Sajnos hibás regisztráció, ellenőrizd az adataid!");
       });
   }
 }

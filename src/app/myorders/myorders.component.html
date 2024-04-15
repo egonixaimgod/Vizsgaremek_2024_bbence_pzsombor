@@ -1,12 +1,11 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <p *ngIf="OrderService.userData">
-                <strong>customerid:</strong> {{ OrderService.userData.customer_id}} <br>
-                <strong>paymentid:</strong> {{ OrderService.userData.payment_id }} <br>
-                <strong>Rendelés időpontja:</strong> {{ OrderService.userData.order_date }} <br>
-                <strong>Mennyiség:</strong> {{ OrderItemsService.userDataItems.amount}}
-            </p>
+<div class="container pt-5 px-5">
+    <div class="card" style="width: 30rem;">
+        <div class="card-body">
+          <h5 class="card-title">Rendeléseim:</h5>
+          <p class="card-text">customerid:{{ OrderService.userData.customer_id }}</p>
+          <p class="card-text">paymentid:{{ OrderService.userData.payment_id }}</p>  
+          <p class="card-text">Rendelés időpontja:{{ OrderService.userData.order_date }}</p> 
+          <p class="card-text">Mennyiség:{{ OrderService.userData.amount }}</p> 
         </div>
+      </div>
     </div>
-</div> 

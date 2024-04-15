@@ -1,11 +1,13 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <p *ngIf="authservice.userData">
-                <strong>Név:</strong> {{ authservice.userData.data.name }} <br>
-                <strong>Város:</strong> {{ authservice.userData.data.city }}<br>
-                <strong>Tokenje:</strong> {{ authservice.token}} 
-            </p>
-        </div>
+<div class="container pt-5 px-5">
+<div class="card" style="width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title">Profilom:</h5>
+      <p class="card-text">Név: {{ authservice.userData.data.name }}</p>
+      <p class="card-text">Email: {{ authservice.userData.data.email }}</p>
+      <p class="card-text">Cím: {{ authservice.userData.data.address }}</p>
+      <p class="card-text">Város: {{ authservice.userData.data.city }}</p>
+      <p class="card-text">Irányítószám: {{ authservice.userData.data.postal_code }}</p>
+      <p class="card-text">Telefonszám: {{ authservice.userData.data.phone }}</p>
     </div>
-</div> 
+  </div>
+</div>

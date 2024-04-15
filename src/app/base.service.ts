@@ -5,13 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class BaseService {
-  host = 'http://localhost:8000/api/';
+  host = 'http://127.0.0.1:8000/api/products';
   constructor(private http: HttpClient) { }
 
   getProducts() {
-    let endpoint = 'products';
-    let url = this.host + endpoint;
-
-    return this.http.get<any>(url);
+    return this.http.get<any>(this.host);
   }
 }
