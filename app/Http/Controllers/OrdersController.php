@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class OrdersController extends Controller
 {
@@ -33,7 +35,21 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Orders::create($request->all());
+
+        $validator = Validator::make($request->all(), [
+            'payment_id' => 'required|exists:payments,id',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $order = Orders::create([
+            'user_id' => Auth::id(),
+            'payment_id' => $request->input('payment_id'),
+            'order_date' => now(),
+        ]);
+
         return response()->json($order, Response::HTTP_CREATED);
     }
 
@@ -69,7 +85,7 @@ class OrdersController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'payment_id' => 'required|exists:payments,id',
-            'order_date' => 'required|date'
+            'date_time' => 'required|date'
         ]);
     
         $order->update($validatedData);
