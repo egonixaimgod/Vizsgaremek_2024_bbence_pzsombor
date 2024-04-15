@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreOrdersRequest;
-use App\Http\Requests\UpdateOrdersRequest;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -64,19 +62,19 @@ class OrdersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)//nem működik
+    public function update(Request $request, $id)
     {
         $order = Orders::findOrFail($id);
 
         $validatedData = $request->validate([
-            'customer_id' => 'required|exists:categories,id',
-            'payment_id' => 'required|exists:brands,id',
-            'order_date' => 'required|date_format:Y-m-d',
+            'user_id' => 'required|exists:users,id',
+            'payment_id' => 'required|exists:payments,id',
+            'order_date' => 'required|date'
         ]);
     
         $order->update($validatedData);
         return response()->json($order, Response::HTTP_OK);
-}
+    }
 
 
     /**

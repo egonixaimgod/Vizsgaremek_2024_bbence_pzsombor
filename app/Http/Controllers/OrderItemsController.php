@@ -62,7 +62,7 @@ class OrderItemsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)//nem működik
+    public function update(Request $request, $id)
     {
         $orderItem = OrderItems::findOrFail($id);
 
@@ -74,7 +74,7 @@ class OrderItemsController extends Controller
     
         $orderItem->update($validatedData);
         return response()->json($orderItem, Response::HTTP_OK);
-}
+    }
 
     
 

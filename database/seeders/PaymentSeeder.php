@@ -10,8 +10,8 @@ class PaymentSeeder extends Seeder
     public function run()
     {
         $payments = [
-            ['status' => 'Billed'],
-            ['status' => 'Paid'],
+            ['status' => 'boltban'],
+            ['status' => 'háznál'],
         ];
 
         foreach ($payments as $paymentData) {

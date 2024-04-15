@@ -47,7 +47,7 @@ Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
 //order_items
 Route::get('/order_items', [OrderItemsController::class, 'index']);
 //orders
-Route::get('/orders', [OrdersController::class, 'index']);
+
 
 //user végpontok
 //
@@ -58,9 +58,10 @@ Route::middleware('auth:sanctum')->group(function () {
 //order_items
 Route::post('/order_items', [OrderItemsController::class, 'store']);
 Route::get('/order_items/{id}', [OrderItemsController::class, 'show']);
-Route::put('/order_items/{id}', [OrderItemsController::class, 'update']);//nem megy valamiert
+Route::put('/order_items/{id}', [OrderItemsController::class, 'update']);
 Route::delete('/order_items/{id}', [OrderItemsController::class, 'destroy']);
 //orders
+Route::get('/orders', [OrdersController::class, 'index']);
 Route::post('/orders', [OrdersController::class, 'store']);
 Route::get('/orders/{id}', [OrdersController::class, 'show']);
 Route::put('/orders/{id}', [OrdersController::class, 'update']);
