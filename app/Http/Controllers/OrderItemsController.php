@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class OrderItemsController extends Controller
 {
@@ -33,6 +34,16 @@ class OrderItemsController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required|exists:orders,id',
+            'product_id' => 'required|exists:products,id',
+            'amount' => 'required|integer',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $orderItem = OrderItems::create($request->all());
         return response()->json($orderItem, Response::HTTP_CREATED);
     }
