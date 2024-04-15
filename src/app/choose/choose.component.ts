@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OrderService } from '../order.service';
 import { AuthService } from '../auth.service';
+import { OrderItemsService } from '../order-items.service';
 
 @Component({
   selector: 'app-choose',
@@ -15,7 +16,13 @@ export class ChooseComponent {
     order_date: '2024-12-12'
   };
 
-  constructor(private http: HttpClient, public OrderService: OrderService, private AuthService: AuthService) { }
+  userDataItems:any = {
+    order_id: '5',
+    product_id: '6',
+    amount: '88' 	
+  }
+
+  constructor(private http: HttpClient, public OrderService: OrderService, private AuthService: AuthService, public OrderItemsService: OrderItemsService) { }
 
   order() {
     if (this.AuthService.isLoggedIn == true) {
@@ -25,5 +32,9 @@ export class ChooseComponent {
     } else {
       alert("Kérjük jelentkezzen be!");
     }
+  }
+
+  order2() {
+    this.OrderItemsService.orderItems(this.userDataItems);
   }
 }

@@ -4,7 +4,8 @@
             <p *ngIf="OrderService.userData">
                 <strong>customerid:</strong> {{ OrderService.userData.customer_id}} <br>
                 <strong>paymentid:</strong> {{ OrderService.userData.payment_id }} <br>
-                <strong>Rendelés időpontja:</strong> {{ OrderService.userData.order_date }}
+                <strong>Rendelés időpontja:</strong> {{ OrderService.userData.order_date }} <br>
+                <strong>Mennyiség:</strong> {{ OrderItemsService.userDataItems.amount}}
             </p>
         </div>
     </div>
