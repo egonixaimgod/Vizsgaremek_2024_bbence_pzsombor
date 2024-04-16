@@ -32,21 +32,30 @@ class OrderItemsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'order_id' => 'required|exists:orders,id',
+        $validator_orders = Validator::make($request->all(), [
             'product_id' => 'required|exists:products,id',
-            'amount' => 'required|integer',
+            'amount' => 'required|integer'
         ]);
     
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+        if ($validator_orders->fails()) {
+            return response()->json($validator_orders->errors(), 422);
         }
 
-        $orderItem = OrderItems::create($request->all());
+        $cuccli2 = [
+            'product_id' => $request->input('product_id'),
+            'amount' =>$request->input('amount')
+        ];
+
+        $orderItem = OrderItems::create([
+            'order_id' => 1,
+            'product_id' => $cuccli2['product_id'],
+            'amount' => $cuccli2['amount']
+        ]);
+
         return response()->json($orderItem, Response::HTTP_CREATED);
-    }
+    }*/
 
     /**
      * Display the specified resource.

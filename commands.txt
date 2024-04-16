@@ -2,7 +2,7 @@
 projekt készítése:  composer create-project laravel/laravel example-app
 modellek, controllerek, stb.. készítése: php artisan make:model Modelname --all
 migrate, seed: php artisan migrate:fresh --seed
-
+routes frissítés: php artisan route:cache
 
 
 projekt elinditasa:
@@ -11,3 +11,82 @@ composer i
 copy .env.example .env
 php artisan migrate:fresh --seed
 php artisan key:generate
+
+
+//
+insomnia teszt adatok:
+felhasználó regisztráció:
+{ 
+	"name": "egonix",
+	"email": "egonix@example.com",
+	"password": "egonix",
+	"confirm_password": "egonix",
+	"address": "egonix",
+	"city": "egonix",
+	"postal_code": "1234",
+	"phone": "12341234"
+}
+
+login:
+{ 
+	"email": "egonix@example.com",
+	"password": "egonix"
+}
+
+order:
+{
+	"azonosito": 1111,
+	"payment_id": 1
+}
+
+order_items:
+{
+	'order_id': 1,
+	'product_id': 2,
+        'amount': 2
+}
+
+placeOrder:
+//több termékes rendelés
+{
+  "azonosito": 5678,
+  "payment_id": 2,
+  "items": [
+    {
+      "product_id": 6,
+      "amount": 2
+    },
+    {
+      "product_id": 3,
+      "amount": 1
+    },
+    {
+      "product_id": 2,
+      "amount": 3
+    }
+  ]
+}
+
+//egy termékes rendelés
+{
+  "azonosito": 1234,
+  "payment_id": 2,
+  "items": [
+    {
+      "product_id": 5,
+      "amount": 4
+    }
+  ]
+}
+
+//hibás adatok
+{
+  "azonosito": 999,
+  "payment_id": 1,
+  "items": [
+    {
+      "product_id": 99999,
+      "amount": 0
+    }
+  ]
+}

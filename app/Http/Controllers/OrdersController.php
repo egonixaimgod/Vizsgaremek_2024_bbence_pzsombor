@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
+use App\Models\OrderItems;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -33,25 +34,81 @@ class OrdersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    /*
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
-            'payment_id' => 'required|exists:payments,id',
+            'azonosito' => 'required|integer|min:1000|max:9999|unique:orders,azonosito',
+            'payment_id' => 'required|exists:payments,id'
         ]);
     
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        $order = Orders::create([
-            'user_id' => Auth::id(),
+        $cuccli1 = [
+            'azonosito' => $request->input('azonosito'),
             'payment_id' => $request->input('payment_id'),
-            'order_date' => now(),
+            'order_date' => now()
+        ];
+
+        $order = Orders::create([
+            'azonosito' =>$cuccli1['azonosito'],
+            'user_id' => Auth::id(),
+            'payment_id' => $cuccli1['payment_id'],
+            'order_date' => $cuccli1['order_date']
+
         ]);
 
         return response()->json($order, Response::HTTP_CREATED);
+    }*/
+
+    public function placeOrder(Request $request)
+    {
+        // Validation
+        $validator = Validator::make($request->all(), [
+            // Orders
+            'azonosito' => 'required|integer|min:1000|max:9999|unique:orders,azonosito',
+            'payment_id' => 'required|exists:payments,id',
+            // Order items (array)
+            'items' => 'required|array',
+            'items.*.product_id' => 'required|exists:products,id',
+            'items.*.amount' => 'required|integer'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        } else {
+            $data = [
+                'azonosito' => $request->input('azonosito'),
+                'payment_id' => $request->input('payment_id'),
+                'order_date' => now(),
+            ];
+
+            // Create the order
+            $order = Orders::create([
+                'user_id' => Auth::id(),
+                'azonosito' => $data['azonosito'],
+                'payment_id' => $data['payment_id'],
+                'order_date' => $data['order_date']
+            ]);
+
+            $orderItems = [];
+            foreach ($request->input('items') as $item) {
+                $orderItems[] = [
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'amount' => $item['amount'],
+                ];
+            }
+
+            // Create order items in a single transaction
+            OrderItems::insert($orderItems);
+
+            return response()->json($order, Response::HTTP_CREATED);
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -83,6 +140,7 @@ class OrdersController extends Controller
         $order = Orders::findOrFail($id);
 
         $validatedData = $request->validate([
+            'azonosito' => 'required|integer|min:1000|max:9999',
             'user_id' => 'required|exists:users,id',
             'payment_id' => 'required|exists:payments,id',
             'date_time' => 'required|date'

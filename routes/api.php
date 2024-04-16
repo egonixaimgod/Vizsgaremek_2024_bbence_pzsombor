@@ -57,6 +57,8 @@ Route::get('/users/{id}', [UsersController::class, 'show']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, "logout"]);
     Route::get('/auth/user',[AuthController::class, 'user']);
+    //placeOrder
+    Route::post('/placeOrder', [OrdersController::class, 'placeOrder']);
     //order_items
     Route::post('/order_items', [OrderItemsController::class, 'store']);
     Route::get('/order_items/{id}', [OrderItemsController::class, 'show']);
