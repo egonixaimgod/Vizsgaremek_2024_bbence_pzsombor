@@ -7,7 +7,7 @@ use App\Http\Controllers\OrderItemsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductsController;
-
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Api\AuthController;
 
 use Illuminate\Http\Request;
@@ -48,6 +48,9 @@ Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
 Route::get('/order_items', [OrderItemsController::class, 'index']);
 //orders
 Route::get('/orders', [OrdersController::class, 'index']);
+//users
+Route::get('/users', [UsersController::class, 'index']);
+Route::get('/users/{id}', [UsersController::class, 'show']);
 
 //user végpontok
 //
@@ -64,6 +67,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders/{id}', [OrdersController::class, 'show']);
     Route::put('/orders/{id}', [OrdersController::class, 'update']);
     Route::delete('/orders/{id}', [OrdersController::class, 'destroy']);
+    //users
+    Route::put('/users/{id}', [UsersController::class, 'update']);
+    Route::delete('/users/{id}', [UsersController::class, 'destroy']);
     });
 
 
@@ -88,11 +94,4 @@ Route::get('/payment/{id}', [PaymentController::class, 'show']);
 Route::get('/products', [ProductsController::class, 'index']);
 Route::get('/products/{id}', [ProductsController::class, 'show']);
 
-//customer
-/*
-Route::get('/users', [CustomerController::class, 'index']);
-Route::post('/users', [CustomerController::class, 'store']);
-Route::get('/users/{id}', [CustomerController::class, 'show']);
-Route::put('/users/{id}', [CustomerController::class, 'update']);
-Route::delete('/users/{id}', [CustomerController::class, 'destroy']);
-*/
+
