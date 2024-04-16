@@ -12,14 +12,13 @@ import { OrderItemsService } from '../order-items.service';
 export class ChooseComponent {
    
   userData: any = {
-    payment_id: '13',
-    order_date: '2024-12-12'
+    payment_id: 1,
   };
 
   userDataItems:any = {
-    order_id: '5',
-    product_id: '6',
-    amount: '88'
+    order_id: 1,
+    product_id: 6,
+    amount: 88
   }
 
   constructor(private http: HttpClient, public OrderService: OrderService, private AuthService: AuthService, public OrderItemsService: OrderItemsService) { }
@@ -35,8 +34,11 @@ export class ChooseComponent {
   }
 
   order2() {
-    if (this.AuthService.isLoggedIn == true) {
-    this.OrderItemsService.orderItems(this.userDataItems);
+    if (this.AuthService.isLoggedIn) {
+      this.OrderItemsService.orderItems(this.userDataItems);
+    } else {
+      alert("Kérjük jelentkezzen be!");
+    }
   }
-}
+  
 }

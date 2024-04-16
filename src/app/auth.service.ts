@@ -19,7 +19,7 @@ export class AuthService {
           alert("A bejelentkezés sikeres!");
           this.isLoggedIn = true;
           this.userData = response
-          this.token = response.token; 
+          this.token = response.token;
           console.log(this.token);
         },
         error: (error: any) => {
