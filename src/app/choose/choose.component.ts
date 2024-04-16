@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { OrderService } from '../order.service';
 import { AuthService } from '../auth.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-choose',
@@ -12,30 +14,17 @@ export class ChooseComponent {
   userData: any = {
     "azonosito": 1,
     "payment_id": 1,
-    "items": [
-      {
-        "product_id": 6,
-        "amount": 2
-      },
-      {
-        "product_id": 3,
-        "amount": 1
-      },
-      {
-        "product_id": 2,
-        "amount": 3
-      }
-    ]
+    "items": [] // Kezdetben üres tömb
   };
 
-  deliveryMethod: string = 'futarszolgalat';
-
-  constructor(private orderService: OrderService, private authService: AuthService) { }
+  constructor(private http: HttpClient, public OrderService: OrderService, private AuthService: AuthService, public CartService: CartService) { }
 
   updatePaymentId(): void {
     // Ha a Futárszolgálat van kiválasztva, akkor payment_id legyen 1, egyébként 2
     this.userData.payment_id = (this.deliveryMethod === 'futarszolgalat') ? 1 : 2;
   }
+
+  deliveryMethod: string = 'futarszolgalat';
 
   onDeliveryMethodChange(method: string): void {
     this.deliveryMethod = method;
@@ -49,11 +38,24 @@ export class ChooseComponent {
     // Állítsd be az "azonosito" értékét a userData objektumban
     this.userData.azonosito = azonosito;
 
-    if (this.authService.isLoggedIn == true) {
-      this.orderService.order(this.userData);
+    // Kosár tartalmának lekérése
+    const cartItems = this.CartService.getCartItems();
+
+    // Kosár tartalmának beállítása a userData objektumba
+    this.userData.items = cartItems.map(item => {
+      return {
+        product_id: item.id,
+        amount: item.amount
+      };
+    });
+
+    if (this.AuthService.isLoggedIn == true) {
+      // Itt már nincs szükség paraméterként átadni a userData-t, mivel az már tartalmazza a kosár tartalmát
+      this.OrderService.order(this.userData);
       alert("A rendelés sikeres!");
     } else {
       alert("Kérjük jelentkezzen be!");
     }
   }
+  
 }

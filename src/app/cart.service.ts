@@ -27,3 +27,4 @@ export class CartService {
     this.cartItems.splice(index, 1);
   }
 }
+
