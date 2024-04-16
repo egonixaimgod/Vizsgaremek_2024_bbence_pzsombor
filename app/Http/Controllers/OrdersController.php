@@ -31,38 +31,6 @@ class OrdersController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    /*
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'azonosito' => 'required|integer|min:1000|max:9999|unique:orders,azonosito',
-            'payment_id' => 'required|exists:payments,id'
-        ]);
-    
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-        $cuccli1 = [
-            'azonosito' => $request->input('azonosito'),
-            'payment_id' => $request->input('payment_id'),
-            'order_date' => now()
-        ];
-
-        $order = Orders::create([
-            'azonosito' =>$cuccli1['azonosito'],
-            'user_id' => Auth::id(),
-            'payment_id' => $cuccli1['payment_id'],
-            'order_date' => $cuccli1['order_date']
-
-        ]);
-
-        return response()->json($order, Response::HTTP_CREATED);
-    }*/
-
     public function placeOrder(Request $request)
     {
         // Validation
@@ -96,7 +64,7 @@ class OrdersController extends Controller
             $orderItems = [];
             foreach ($request->input('items') as $item) {
                 $orderItems[] = [
-                    'order_id' => $order->id,
+                    'order_id' => Orders::where('azonosito', $request->input('azonosito'))->first()->id,
                     'product_id' => $item['product_id'],
                     'amount' => $item['amount'],
                 ];
@@ -108,7 +76,6 @@ class OrdersController extends Controller
             return response()->json($order, Response::HTTP_CREATED);
         }
     }
-
 
     /**
      * Display the specified resource.
