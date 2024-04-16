@@ -23,6 +23,18 @@ export class ChooseComponent {
 
   constructor(private http: HttpClient, public OrderService: OrderService, private AuthService: AuthService, public OrderItemsService: OrderItemsService) { }
 
+  updatePaymentId(): void {
+    // Ha a Futárszolgálat van kiválasztva, akkor payment_id legyen 1, egyébként 2
+    this.userData.payment_id = (this.deliveryMethod === 'futarszolgalat') ? 1 : 2;
+  }
+
+  deliveryMethod: string = 'futarszolgalat';
+
+  onDeliveryMethodChange(method: string): void {
+    this.deliveryMethod = method;
+    this.updatePaymentId();
+  }
+  
   order() {
     if (this.AuthService.isLoggedIn == true) {
       this.userData.customer_id = this.AuthService.userData.data.id;
