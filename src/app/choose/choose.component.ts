@@ -37,7 +37,6 @@ export class ChooseComponent {
   
   order() {
     if (this.AuthService.isLoggedIn == true) {
-      this.userData.customer_id = this.AuthService.userData.data.id;
       this.OrderService.order(this.userData);
       alert("A rendelés sikeres!");
     } else {
