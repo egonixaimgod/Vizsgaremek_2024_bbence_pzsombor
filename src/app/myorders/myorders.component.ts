@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OrderService } from '../order.service';
-import { OrderItemsService } from '../order-items.service';
 
 
 @Component({ 
@@ -11,6 +10,6 @@ import { OrderItemsService } from '../order-items.service';
 })
 
 export class MyordersComponent {
-  constructor (public OrderService: OrderService, public OrderItemsService: OrderItemsService) {}
+  constructor (public OrderService: OrderService) {}
 }
 

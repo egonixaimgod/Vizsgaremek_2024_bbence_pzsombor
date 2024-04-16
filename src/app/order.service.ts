@@ -21,7 +21,7 @@ export class OrderService {
       })
     };
 
-    this.http.post('http://127.0.0.1:8000/api/orders', userData, httpOptions).subscribe(
+    this.http.post('http://127.0.0.1:8000/api/placeOrder', userData, httpOptions).subscribe(
       {
 
         next: (response: any) => {
