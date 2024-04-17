@@ -17,3 +17,32 @@
         </div>
     </div>
 </div>
+
+<form #productForm="ngForm" (ngSubmit)="addProduct()" class="container py-5 px-5">
+    <div class="form-group">
+      <label for="category_id">Kategória ID:</label>
+      <input type="number" class="form-control" id="category_id" name="category_id" [(ngModel)]="newProduct.category_id" required>
+    </div>
+    <div class="form-group pt-2">
+      <label for="brand_id">Márka ID:</label>
+      <input type="number" class="form-control" id="brand_id" name="brand_id" [(ngModel)]="newProduct.brand_id" required>
+    </div>
+    <div class="form-group pt-2">
+      <label for="name">Név:</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="newProduct.name" required>
+    </div>
+    <div class="form-group pt-2">
+      <label for="cost">Ár:</label>
+      <input type="number" class="form-control" id="cost" name="cost" [(ngModel)]="newProduct.cost" required>
+    </div>
+    <div class="form-group pt-2">
+      <label for="amount">Mennyiség:</label>
+      <input type="number" class="form-control" id="amount" name="amount" [(ngModel)]="newProduct.amount" required>
+    </div>
+    <div class="form-group pt-2">
+      <label for="description">Leírás:</label>
+      <textarea class="form-control" id="description" name="description" [(ngModel)]="newProduct.description" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2" [disabled]="productForm.invalid">Termék hozzáadása</button>
+  </form>
+  
