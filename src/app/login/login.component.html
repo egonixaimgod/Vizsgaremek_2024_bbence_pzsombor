@@ -1,15 +1,17 @@
-<div style="padding-top: 3rem; padding-bottom: 3rem; padding-left: 40rem; padding-right: 40rem;">
+<div class="container py-5 px-5" style="max-width: 30rem;">
     <h1>Bejelentkezés</h1>
     <div class="py-2">
         <label for="email" class="form-label">Email cím</label>
-        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="userData.email">
+        <input type="email" class="form-control" style="min-width: 15rem;" id=" email" name="email"
+            [(ngModel)]="userData.email">
     </div>
     <div class="py-2">
         <label for="password" class="form-label">Jelszó</label>
-        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="userData.password">
+        <input type="password" class="form-control" style="min-width: 15rem;" id=" password" name="password"
+            [(ngModel)]="userData.password">
     </div>
 
     <div style="text-align: right;">
         <button type="submit" class="btn btn-warning" routerLink="/home" (click)="login()">Tovább</button>
-        </div>
+    </div>
 </div>

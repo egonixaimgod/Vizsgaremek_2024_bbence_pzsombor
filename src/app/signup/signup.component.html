@@ -1,4 +1,4 @@
-<div style="padding-top: 3rem; padding-bottom: 3rem; padding-left: 40rem; padding-right: 40rem;">
+<div class="container py-5 px-5" style="max-width: 30rem;">
     <h1>Regisztráció</h1>
     <div class="py-2">
         <label for="name" class="form-label">Név</label>
@@ -14,7 +14,8 @@
     </div>
     <div class="py-2">
         <label for="confirmPassword" class="form-label">Jelszó újra</label>
-        <input type="password" class="form-control" id="confirmPassword" name="confirm_password" [(ngModel)]="userData.confirm_password">
+        <input type="password" class="form-control" id="confirmPassword" name="confirm_password"
+            [(ngModel)]="userData.confirm_password">
     </div>
     <div class="py-2">
         <label for="address" class="form-label">Cím</label>
@@ -34,6 +35,6 @@
     </div>
 
     <div style="text-align: right;">
-    <button type="submit" class="btn btn-warning" routerLink="/login" (click)="register()">Tovább</button>
+        <button type="submit" class="btn btn-warning" routerLink="/login" (click)="register()">Tovább</button>
     </div>
 </div>

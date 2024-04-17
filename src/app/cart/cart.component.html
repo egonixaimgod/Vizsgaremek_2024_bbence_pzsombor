@@ -1,15 +1,16 @@
 <div class="container px-5 py-2">
-    
+
     <div class="row">
         <div class="col-md-auto py-2" *ngFor="let item of cartItems">
-            <div class="card" style="width: 18rem; height: 28rem;">
-                <img [src]="generateImagePath(item.name)" class="card-img-top" alt="...">
+            <div class="card" style="width: 18rem; min-height: 28rem;">
+                <img [src]="generateImagePath(item.name)" class="card-img-top"
+                    style="max-height: 18rem; max-width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{item.name}}</h5>
                     <p class="card-text">Ár: {{item.cost}} Ft<br>
                         Példányszám: {{item.amount}}</p>
-                        <button class="btn btn-danger" (click)="removeFromCart(item)">Törlés</button>
-                
+                    <button class="btn btn-danger" (click)="removeFromCart(item)">Törlés</button>
+
                 </div>
             </div>
         </div>
