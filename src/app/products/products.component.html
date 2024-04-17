@@ -7,9 +7,10 @@
                     <h5 class="card-text">Ár: {{product.cost}} Ft
                     </h5>
                 </div>
-                <img [src]="generateImagePath(product.name)" class="card-img-bottom" alt="AMD Ryzen 5 5600X" style="">
+                <img [src]="generateImagePath(product.name)" class="card-img-bottom" alt="" style="min-height: 24.380rem;">
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <input type="number" min="1" [(ngModel)]="quantities[i]" style="width: 4rem;">
+                    <button class="btn btn-danger" (click)="onDeleteProduct(product)">Töröl</button>
                     <button class="btn btn-warning btn-right" (click)="onAddToCart(product, quantities[i])"
                         routerLink="/cart">Rendeld meg!</button>
                 </div>
