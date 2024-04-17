@@ -9,18 +9,24 @@ import { CartService } from '../cart.service';
 export class CartComponent {
   cartItems: any[];
   totalPrice: number = 0;
+
   constructor(private cartService: CartService) {
     this.cartItems = this.cartService.getCartItems();
-    this.totalPrice = this.cartItems.reduce((total, item) => total + parseInt(item.cost), 0);
+    this.calculateTotalPrice();
   }
+
   generateImagePath(productName: string): string {
     return `assets/images/${productName}.jpg`;
   }
 
   removeFromCart(index: number): void {
     this.cartService.removeFromCart(index);
-    this.totalPrice = this.cartItems.reduce((total, item) => total + parseInt(item.cost), 0);
+    this.calculateTotalPrice();
   }
 
-  next() {alert("Válasszon szállítási módot!");}
+  calculateTotalPrice(): void {
+    this.totalPrice = this.cartItems.reduce((total, item) => total + (parseInt(item.cost) * item.amount), 0);
+  }
+
+  next() { alert("Válasszon szállítási módot!"); }
 }
