@@ -42,9 +42,9 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::put('/updateCategory/{id}', [CategoriesController::class, 'update']);
     Route::delete('/deleteCategory/{id}', [CategoriesController::class, 'destroy']);
     //products
-    Route::post('/addProduct', [ProductsController::class, 'store']);
-    Route::put('/updateProduct/{id}', [ProductsController::class, 'update']);
-    Route::delete('/deleteProduct/{id}', [ProductsController::class, 'destroy']);
+    Route::post('/products', [ProductsController::class, 'store']);
+    Route::put('/products/{id}', [ProductsController::class, 'update']);
+    Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
     //order_items
     Route::get('/order_items', [OrderItemsController::class, 'index']);
     //orders
@@ -63,7 +63,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, "logout"]);
     Route::get('/auth/profile',[AuthController::class, 'profile']);
-    Route::post('/auth/deleteProfile', [AuthController::class, 'deleteProfile']);
+    Route::delete('/auth/deleteProfile', [AuthController::class, 'deleteProfile']);
     Route::put('/auth/updateProfile', [AuthController::class, 'updateProfile']);
     //Rendelések kezelése
     Route::post('/placeOrder', [OrdersController::class, 'placeOrder']);

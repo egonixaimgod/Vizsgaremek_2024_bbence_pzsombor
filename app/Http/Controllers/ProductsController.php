@@ -71,7 +71,8 @@ class ProductsController extends Controller
             'brand_id' => 'required|exists:brands,id',
             'name' => 'required|string',
             'cost' => 'required|integer|min:0',
-            'amount' => 'required|integer|min:0',
+            'img' => 'required|string',
+            'amount' => 'required|integer|min:0'
         ]);
         
         $product->update($request->all());
