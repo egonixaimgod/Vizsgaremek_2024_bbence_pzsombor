@@ -73,7 +73,7 @@ class OrdersController extends Controller
         try {
             $user_id = Auth::id();
 
-            $orders = Orders::where('user_id', $user_id)->with('orderItems')->paginate($perPage);
+            $orders = Orders::where('user_id', $user_id)->get();
 
             if ($orders->isEmpty()) {
                 return response()->json(['message' => 'No orders found'], 404);

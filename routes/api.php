@@ -52,7 +52,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     //users
     Route::get('/users', [UsersController::class, 'index']);
     Route::get('/users/{id}', [UsersController::class, 'show']);
-    //Route::put('/updateUser/{id}', [UsersController::class, 'update']);
+    Route::put('/updateUser/{id}', [UsersController::class, 'update']);
     Route::delete('/deleteUser/{id}', [UsersController::class, 'destroy']);
 
 });
@@ -68,6 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Rendelések kezelése
     Route::post('/placeOrder', [OrdersController::class, 'placeOrder']);
     Route::get('/showOrders', [OrdersController::class, 'showOrders']);
+    Route::get('/showOrderItems/{id}', [OrderItemsController::class, 'showOrderItems']);
     Route::put('/updateOrder/{id}', [OrdersController::class, 'updateOrder']);
     Route::delete('/deleteOrder/{id}', [OrdersController::class, 'deleteOrder']);
     //order_items

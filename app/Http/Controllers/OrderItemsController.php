@@ -32,7 +32,7 @@ class OrderItemsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    /*public function store(Request $request)
+    public function store(Request $request)
     {
         $validator_orders = Validator::make($request->all(), [
             'product_id' => 'required|exists:products,id',
@@ -55,7 +55,7 @@ class OrderItemsController extends Controller
         ]);
 
         return response()->json($orderItem, Response::HTTP_CREATED);
-    }*/
+    }
 
     /**
      * Display the specified resource.
@@ -71,12 +71,19 @@ class OrderItemsController extends Controller
         return response()->json($orderItem);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(OrderItems $orderItems)
+    public function showOrderItems($order_id)
     {
-        //
+        try {
+            $order_items = OrderItems::where('order_id', $order_id)->get();
+
+            if ($order_items->isEmpty()) {
+                return response()->json(['message' => 'No orders found'], 404);
+            }
+
+            return response()->json($order_items->toArray(), 200);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**

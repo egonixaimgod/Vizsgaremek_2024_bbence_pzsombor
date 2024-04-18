@@ -30,6 +30,40 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
+    public function update(Request $request, $id){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:2|max:100',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|max:30',
+            'address' => 'required|min:5|max:100',
+            'city' => 'required|min:2|max:50',
+            'postal_code' => 'required|min:4|max:4',
+            'phone' => 'required|min:3|max:12',
+            'admin' => 'required|boolean'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message'=>'Validations fails',
+                'errors'=>$validator->errors()
+            ], 422);
+        }
+        else{
+            $user = User::where('id', $id)->get();
+
+            $user=User::update([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'password'=>Hash::make($request->password),
+                'address'=>$request->address,
+                'city'=>$request->city,
+                'postal_code'=>$request->postal_code,
+                'phone'=>$request->phone,
+                'admin'=>$request->admin
+            ]);
+        }
+    }
+
     public function destroy($id)
     {
         $order = Orders::findOrFail($id);
