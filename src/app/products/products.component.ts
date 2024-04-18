@@ -1,7 +1,7 @@
   import { Component, OnInit } from '@angular/core';
   import { BaseService } from '../base.service';
   import { CartService } from '../cart.service';
-  import { HttpClient } from '@angular/common/http';
+  import { HttpClient, HttpHeaders } from '@angular/common/http';
   import { AuthService } from '../auth.service';
   import { Router, RouterLink } from '@angular/router';
   
@@ -68,7 +68,14 @@
     }
 
     addProduct(): void {
-      this.http.post<any>(this.api.host, this.newProduct)
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.AuthService.token}`
+        })
+      };
+    
+      this.http.post<any>(this.api.host, this.newProduct, httpOptions)
         .subscribe({
           next: (data) => {
             console.log('Termék sikeresen hozzáadva!', data);
@@ -94,8 +101,13 @@
 
     onDeleteProduct(product: Product): void {
       const url = `${this.api.host}/${product.id}`;
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${this.AuthService.token}`
+        })
+      };
     
-      this.http.delete<any>(url)
+      this.http.delete<any>(url, httpOptions)
         .subscribe({
           next: () => {
             console.log('Termék sikeresen törölve!');
