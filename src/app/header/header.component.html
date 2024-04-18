@@ -49,17 +49,17 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" routerLink="/profile">Adatlapom</a></li>
-                        <li><a class="dropdown-item" routerLink="/orders">Rendeléseim</a></li>
+                        <li><a *ngIf="!authService.isAdmin" class="dropdown-item" routerLink="/orders">Rendeléseim</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" *ngIf="authService.isLoggedIn" routerLink="/home"
-                                (click)="authService.isLoggedIn = false; authService.userData = {}">Kijelentkezés</a>
+                        <li><a class="dropdown-item" routerLink="/home" *ngIf="authService.isLoggedIn"
+                                (click)="onLogout()">Kijelentkezés</a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/cart" routerLinkActive="active" ariaCurrentWhenActive="page">
+                    <a class="nav-link"  *ngIf="!authService.isAdmin && authService.isLoggedIn"  routerLink="/cart" routerLinkActive="active" ariaCurrentWhenActive="page">
                         Kosár
                     </a>
                 </li>

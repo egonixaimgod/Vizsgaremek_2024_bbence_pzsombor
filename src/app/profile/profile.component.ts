@@ -7,6 +7,8 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./profile.component.css']
 }) 
 export class ProfileComponent {
+  editing = false;
+
   constructor(public authservice: AuthService) { }
 
   updateProfile() {
@@ -15,6 +17,7 @@ export class ProfileComponent {
         next: (response: any) => {
           console.log('Profil frissítése sikeres:', response);
           alert("A profil frissítése sikeres!");
+          this.editing = false;
         },
         error: (error: any) => {
           console.error('Profil frissítése sikertelen:', error);
@@ -22,5 +25,23 @@ export class ProfileComponent {
         }   
       }
     );
+  }
+
+  deleteProfile() {
+    if (confirm("Biztosan törölni szeretné a profilját?")) {
+      this.authservice.deleteProfile().subscribe(
+        {
+          next: (response: any) => {
+            console.log('Profil törlése sikeres:', response);
+            alert("A profil törlése sikeres!");
+            // Ide írhatod a további teendőket, pl. visszairányítás, stb.
+          },
+          error: (error: any) => {
+            console.error('Profil törlése sikertelen:', error);
+            alert("A profil törlése sikertelen!");
+          }   
+        }
+      );
+    }
   }
 }

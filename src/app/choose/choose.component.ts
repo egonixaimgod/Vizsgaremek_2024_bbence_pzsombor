@@ -47,11 +47,12 @@ export class ChooseComponent {
     if (this.AuthService.isLoggedIn) {
       this.OrderService.order(this.userData).subscribe((success: boolean) => {
         if (success) {
-          this.CartService.clearCart(); // Ha a rendelés sikeres volt, töröljük a kosár tartalmát
+          this.CartService.clearCart(); 
+          
         }
       });
     } else {
-      alert("Kérjük jelentkezzen be!");
+
     }
   }
 }

@@ -2,14 +2,16 @@
   <div class="card" style="width: 30rem;">
     <div class="card-body">
       <h5 class="card-title">Profilom:</h5>
-      <form (ngSubmit)="updateProfile()" #profileForm="ngForm">
-        <p class="card-text">Név: <input type="text" name="name" [(ngModel)]="authservice.userData.data.name" required></p>
+      <form #profileForm="ngForm">
+        <p class="card-text">Név: <span *ngIf="!editing">{{ authservice.userData.data.name }}</span><input *ngIf="editing" type="text" name="name" [(ngModel)]="authservice.userData.data.name" required></p>
         <p class="card-text">Email: {{ authservice.userData.data.email }}</p>
-        <p class="card-text">Cím: <input type="text" name="address" [(ngModel)]="authservice.userData.data.address"></p>
-        <p class="card-text">Város: <input type="text" name="city" [(ngModel)]="authservice.userData.data.city"></p>
-        <p class="card-text">Irányítószám: <input type="text" name="postal_code" [(ngModel)]="authservice.userData.data.postal_code"></p>
-        <p class="card-text">Telefonszám: <input type="text" name="phone" [(ngModel)]="authservice.userData.data.phone"></p>
-        <button type="submit" class="btn btn-primary">Profil frissítése</button>
+        <p class="card-text">Cím: <span *ngIf="!editing">{{ authservice.userData.data.address }}</span><input *ngIf="editing" type="text" name="address" [(ngModel)]="authservice.userData.data.address"></p>
+        <p class="card-text">Város: <span *ngIf="!editing">{{ authservice.userData.data.city }}</span><input *ngIf="editing" type="text" name="city" [(ngModel)]="authservice.userData.data.city"></p>
+        <p class="card-text">Irányítószám: <span *ngIf="!editing">{{ authservice.userData.data.postal_code }}</span><input *ngIf="editing" type="text" name="postal_code" [(ngModel)]="authservice.userData.data.postal_code"></p>
+        <p class="card-text">Telefonszám: <span *ngIf="!editing">{{ authservice.userData.data.phone }}</span><input *ngIf="editing" type="text" name="phone" [(ngModel)]="authservice.userData.data.phone"></p>
+        <button *ngIf="!editing" type="button" class="btn btn-primary" (click)="editing = true">Profil szerkesztése</button>
+        <button *ngIf="editing" type="submit" class="btn btn-primary">Profil frissítése</button>
+        <button *ngIf="authservice.isLoggedIn" type="button" class="btn btn-danger mx-3" (click)="deleteProfile()">Profil törlése</button>
       </form>
     </div>
   </div>

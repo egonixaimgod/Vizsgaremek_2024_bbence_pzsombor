@@ -43,4 +43,8 @@ export class AuthService {
   updateProfile(userData: any) {
     return this.http.put('http://127.0.0.1:8000/api/updateProfile', userData);
   }
+
+  deleteProfile() {
+    return this.http.delete('http://127.0.0.1:8000/api/deleteProfile');
+  }
 }
