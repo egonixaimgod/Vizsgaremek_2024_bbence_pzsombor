@@ -1,0 +1,20 @@
+<div class="container">
+    <h2>Termék szerkesztése</h2>
+    <form (ngSubmit)="saveProduct()" #productForm="ngForm">
+      <div class="form-group">
+        <label for="name">Név:</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="product.name" required>
+      </div>
+      <div class="form-group">
+        <label for="cost">Ár:</label>
+        <input type="number" class="form-control" id="cost" name="cost" [(ngModel)]="product.cost" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Leírás:</label>
+        <textarea class="form-control" id="description" name="description" [(ngModel)]="product.description" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Mentés</button>
+      <button type="button" class="btn btn-secondary" (click)="goBack()">Vissza</button>
+    </form>
+  </div>
+  

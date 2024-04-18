@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../base.service';
 import { CartService } from '../cart.service';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 export interface Product {
   id:number;
@@ -31,7 +32,7 @@ export class ProductsComponent implements OnInit {
     description: '',
   };
 
-  constructor(private api: BaseService, private cartService: CartService, private http: HttpClient) { }
+  constructor(private api: BaseService, private cartService: CartService, private http: HttpClient, public AuthService: AuthService) { }
 
   ngOnInit(): void {
     this.getProducts();

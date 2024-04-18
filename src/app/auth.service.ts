@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
   public isLoggedIn = false;
+  public isAdmin = false;
   public userData: any = {};
   public token: any;
 
@@ -21,6 +22,14 @@ export class AuthService {
           this.userData = response
           this.token = response.token;
           console.log(this.token);
+
+          if (this.userData.data.admin == 1) {
+            this.isAdmin = true
+          }
+          else {
+            this.isAdmin = false
+          }
+          console.log(this.userData.data.admin)
         },
         error: (error: any) => {
           console.error('Bejelentkezés sikertelen:', error);
