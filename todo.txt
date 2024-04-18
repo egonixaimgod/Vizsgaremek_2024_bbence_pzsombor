@@ -1,0 +1,11 @@
+Regisztrációnál ha üresen hagyok valamit, akkor írja ki, hogy töltsem ki a mezőt
+Felhasználó nem tudja updatelni az adatait
+Kosárból rendelés után kiüríteni
+A rendeléseimet módosítani, törölni
+Adminként a termékek tabból módosítani is
+termék törlés után frissítse az oldalt
+Csak authentikált felhasználó tudjon temréket felvenni
+
+updatelni terméket, árat adminként
+
+profilon át tudjuk írni az árát
