@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http'; // Importáljuk HttpHeaders-t
 
 @Injectable({
   providedIn: 'root'
@@ -41,10 +41,20 @@ export class AuthService {
   }
 
   updateProfile(userData: any) {
-    return this.http.put('http://127.0.0.1:8000/api/updateProfile', userData);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      })
+    };
+    return this.http.put('http://127.0.0.1:8000/api/auth/updateProfile', userData, httpOptions);
   }
 
   deleteProfile() {
-    return this.http.delete('http://127.0.0.1:8000/api/deleteProfile');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      })
+    };
+    return this.http.delete('http://127.0.0.1:8000/api/auth/deleteProfile', httpOptions);
   }
 }
