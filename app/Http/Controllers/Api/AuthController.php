@@ -129,10 +129,11 @@ class AuthController extends Controller
         $rules = [
             'name' => 'string|max:255', // Make name optional
             'email' => 'email|unique:users,email,' . $userId, // Unique email check
-            'address' => 'string|max:255', // Make address optional
+            'password' => 'string|min:6|max:30', // Make password optional 
+            'address' => 'string|max:255', // Make address optional 
             'city' => 'string|max:255', // Make city optional
-            'postal_code' => 'integer|min:4|max:4', // Make postal code optional
-            'phone' => 'integer|min:3|max:12', // Make phone number optional
+            'postal_code' => 'string|min:4|max:4', // Make postal code optional
+            'phone' => 'string|min:3|max:12', // Make phone number optional
         ];
     
         $validator = Validator::make($request->all(), $rules);
@@ -158,6 +159,7 @@ class AuthController extends Controller
         $user->update([
             'name' => $request->name ?? $user->name, // Use existing value if not provided
             'email' => $request->email ?? $user->email, // Same as name
+            'password' => $request->password ?? $user->password,
             'address' => $request->address ?? $user->address,
             'city' => $request->city ?? $user->city,
             'postal_code' => $request->postal_code ?? $user->postal_code,
@@ -167,7 +169,8 @@ class AuthController extends Controller
         // Return a success response
         return response()->json([
             'message' => 'Profile updated successfully',
-            'data' => $user
+            'data' => $user,
+            'password' => $request->password
         ], 200);
     }
 
