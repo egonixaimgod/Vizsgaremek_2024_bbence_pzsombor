@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../base.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 export interface Product {
   id: number;
@@ -19,11 +19,10 @@ export interface Product {
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css']
 })
-
 export class ProductEditComponent implements OnInit {
   editedProduct!: Product;
 
-  constructor(private api: BaseService, private http: HttpClient, private AuthService: AuthService) { }
+  constructor(private api: BaseService, private http: HttpClient, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.editedProduct = { ...this.api.getSelectedProduct() };
@@ -32,7 +31,7 @@ export class ProductEditComponent implements OnInit {
   updateProduct(): void {
     const httpOptions = { // Definiáljuk a httpOptions objektumot
       headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.AuthService.token}`
+        'Authorization': `Bearer ${this.authService.token}`
       })
     };
 
@@ -41,11 +40,20 @@ export class ProductEditComponent implements OnInit {
         next: (data) => {
           console.log('Termék sikeresen frissítve!', data);
           alert("Termék sikeresen frissítve!");
+          this.reloadCurrentRoute(); // Útvonal újratöltése
         },
         error: (err) => {
           console.error('Hiba a termék frissítése közben:', err);
           alert('Hiba a termék frissítése közben:');
         },
       });
+  }
+
+  // Útvonal újratöltése
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }

@@ -11,5 +11,17 @@
         <label for="name">Leírás:</label>
         <input type="text" class="form-control" id="description" name="description" [(ngModel)]="editedProduct.description" required>
     </div>
-    <button type="submit" class="btn btn-primary my-2" routerLink="/home" (click)="updateProduct()">Mentés</button>
+    <div class="form-group py-2">
+        <label for="name">Category_id:</label>
+        <input type="number" class="form-control" id="category_id" name="category_id" [(ngModel)]="editedProduct.category_id" required>
+    </div>
+    <div class="form-group py-2">
+        <label for="name">Brand_id:</label>
+        <input type="number" class="form-control" id="brand_id" name="brand_id" [(ngModel)]="editedProduct.brand_id" required>
+    </div>
+    <div class="form-group py-2">
+        <label for="name">Amount:</label>
+        <input type="number" class="form-control" id="amount" name="amount" [(ngModel)]="editedProduct.amount" required>
+    </div>
+    <button type="submit" class="btn btn-primary my-2" routerLink="/products" (click)="updateProduct()">Mentés</button>
 </form>
