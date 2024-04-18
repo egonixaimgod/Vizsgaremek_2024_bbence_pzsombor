@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -28,12 +29,6 @@ class UsersController extends Controller
 
         return response()->json($user);
     }
-
-    public function update(Request $request, $id)
-    {
-        //meg ke irni
-    }
-
 
     public function destroy($id)
     {

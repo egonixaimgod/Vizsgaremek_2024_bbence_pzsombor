@@ -30,35 +30,46 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //authenticált végpontok
-
 //admin végpontok
-//brands
-Route::post('/brands', [BrandsController::class, 'store']);
-Route::put('/brands/{id}', [BrandsController::class, 'update']);
-Route::delete('/brands/{id}', [BrandsController::class, 'destroy']);
-//categories
-Route::post('/categories', [CategoriesController::class, 'store']);
-Route::put('/categories/{id}', [CategoriesController::class, 'update']);
-Route::delete('/categories/{id}', [CategoriesController::class, 'destroy']);
-//products
-Route::post('/products', [ProductsController::class, 'store']);
-Route::put('/products/{id}', [ProductsController::class, 'update']);
-Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
-//order_items
-Route::get('/order_items', [OrderItemsController::class, 'index']);
-//orders
-Route::get('/orders', [OrdersController::class, 'index']);
-//users
-Route::get('/users', [UsersController::class, 'index']);
-Route::get('/users/{id}', [UsersController::class, 'show']);
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+   
+    //brands kezelés
+    Route::post('/addBrand', [BrandsController::class, 'store']);
+    Route::put('/updateBrand/{id}', [BrandsController::class, 'update']);
+    Route::delete('/deleteBrand/{id}', [BrandsController::class, 'destroy']);
+    //categories
+    Route::post('/addCategory', [CategoriesController::class, 'store']);
+    Route::put('/updateCategory/{id}', [CategoriesController::class, 'update']);
+    Route::delete('/deleteCategory/{id}', [CategoriesController::class, 'destroy']);
+    //products
+    Route::post('/addProduct', [ProductsController::class, 'store']);
+    Route::put('/updateProduct/{id}', [ProductsController::class, 'update']);
+    Route::delete('/deleteProduct/{id}', [ProductsController::class, 'destroy']);
+    //order_items
+    Route::get('/order_items', [OrderItemsController::class, 'index']);
+    //orders
+    Route::get('/orders', [OrdersController::class, 'index']);
+    //users
+    Route::get('/users', [UsersController::class, 'index']);
+    Route::get('/users/{id}', [UsersController::class, 'show']);
+    //Route::put('/updateUser/{id}', [UsersController::class, 'update']);
+    Route::delete('/deleteUser/{id}', [UsersController::class, 'destroy']);
+
+});
+
 
 //user végpontok
 //
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, "logout"]);
-    Route::get('/auth/user',[AuthController::class, 'user']);
-    //placeOrder
+    Route::get('/auth/profile',[AuthController::class, 'profile']);
+    Route::post('/auth/deleteProfile', [AuthController::class, 'deleteProfile']);
+    Route::put('/auth/updateProfile', [AuthController::class, 'updateProfile']);
+    //Rendelések kezelése
     Route::post('/placeOrder', [OrdersController::class, 'placeOrder']);
+    Route::get('/showOrders', [OrdersController::class, 'showOrders']);
+    Route::put('/updateOrder/{id}', [OrdersController::class, 'updateOrder']);
+    Route::delete('/deleteOrder/{id}', [OrdersController::class, 'deleteOrder']);
     //order_items
     Route::post('/order_items', [OrderItemsController::class, 'store']);
     Route::get('/order_items/{id}', [OrderItemsController::class, 'show']);

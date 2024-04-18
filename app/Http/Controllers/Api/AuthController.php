@@ -85,16 +85,26 @@ class AuthController extends Controller
         }
     }
 
-    public function user(Request $request){
-        return response()->json([
-            'message'=>'User succesfully fetched',
-            'data'=>$request->user()
-        ], 200);
+    public function profile(Request $request)
+    {
+        if (Auth::check()) {
+            return response()->json([
+                'message' => 'User successfully fetched',
+                'data' => $request->user()
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Unauthorized access',
+                'error' => 'User not authenticated'
+            ], 401);
+        }
     }
 
-    public function logout(Request $request){
-        if ($request->user()) {
-            $request->user()->tokens()->delete();
+    public function logout(Request $request)
+    {
+        \Log::info('User object: ' . print_r($request->user(), true));
+        if ($user = $request->user()) {
+            $user->tokens()->delete();
             return response()->json([
                 'message' => 'User successfully logged out',
             ], 200);
@@ -103,6 +113,79 @@ class AuthController extends Controller
                 'message' => 'No user authenticated',
             ], 401);
         }
+    }
+
+    public function updateProfile(Request $request)
+    {
+        // Check if user is authenticated
+        if (!Auth::check()) {
+            return abort(403, 'Unauthorized'); // User not authenticated
+        }
+    
+        // Get the currently authenticated user's ID
+        $userId = Auth::user()->id;
+    
+        // Validate incoming request data
+        $rules = [
+            'name' => 'string|max:255', // Make name optional
+            'email' => 'email|unique:users,email,' . $userId, // Unique email check
+            'address' => 'string|max:255', // Make address optional
+            'city' => 'string|max:255', // Make city optional
+            'postal_code' => 'string|max:255', // Make postal code optional
+            'phone' => 'string|max:255', // Make phone number optional
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Invalid input',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+    
+        // Retrieve the user to be updated (using the current user's ID)
+        $user = User::findOrFail($userId);
+    
+        // Check if the user is trying to change their own email to one already taken
+        if ($user->email !== $request->email && User::where('email', $request->email)->exists()) {
+            return response()->json([
+                'message' => 'Email already taken',
+            ], 400);
+        }
+    
+        // Update the user's profile information
+        $user->update([
+            'name' => $request->name ?? $user->name, // Use existing value if not provided
+            'email' => $request->email ?? $user->email, // Same as name
+            'address' => $request->address ?? $user->address,
+            'city' => $request->city ?? $user->city,
+            'postal_code' => $request->postal_code ?? $user->postal_code,
+            'phone' => $request->phone ?? $user->phone,
+        ]);
+    
+        // Return a success response
+        return response()->json([
+            'message' => 'Profile updated successfully',
+            'data' => $user
+        ], 200);
+    }
+
+    public function deleteProfile(Request $request)
+    {
+        // Get the currently authenticated user's ID
+        $userId = Auth::user()->id;
+    
+        // Retrieve the user to be deleted
+        $user = User::findOrFail($userId);
+    
+        // Delete the user (soft delete)
+        $user->delete();
+    
+        // Return a success response
+        return response()->json([
+            'message' => 'Your profile has been deleted successfully',
+        ], 200);
     }
 
 }

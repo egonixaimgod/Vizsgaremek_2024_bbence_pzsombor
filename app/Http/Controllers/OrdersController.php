@@ -23,22 +23,14 @@ class OrdersController extends Controller
         return response()->json($order);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     public function placeOrder(Request $request)
     {
         // Validation
         $validator = Validator::make($request->all(), [
-            // Orders
+            // orders
             'azonosito' => 'required|integer|min:1000|max:9999|unique:orders,azonosito',
             'payment_id' => 'required|exists:payments,id',
-            // Order items (array)
+            // order_items
             'items' => 'required|array',
             'items.*.product_id' => 'required|exists:products,id',
             'items.*.amount' => 'required|integer'
@@ -70,58 +62,69 @@ class OrdersController extends Controller
                 ];
             }
 
-            // Create order items in a single transaction
             OrderItems::insert($orderItems);
 
             return response()->json($order, Response::HTTP_CREATED);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function showOrders($perPage = 10)
     {
-        $order = Orders::find($id);
+        try {
+            $user_id = Auth::id();
 
-        if ($order === null) {
-            return response()->json(['error' => 'A Rendelés nem található'], 404);
+            $orders = Orders::where('user_id', $user_id)->with('orderItems')->paginate($perPage);
+
+            if ($orders->isEmpty()) {
+                return response()->json(['message' => 'No orders found'], 404);
+            }
+
+            return response()->json($orders->toArray(), 200);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
-
-        return response()->json($order);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Orders $orders)
+    public function updateOrder(Request $request, $order_id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        $order = Orders::findOrFail($id);
-
-        $validatedData = $request->validate([
-            'azonosito' => 'required|integer|min:1000|max:9999',
-            'user_id' => 'required|exists:users,id',
-            'payment_id' => 'required|exists:payments,id',
-            'date_time' => 'required|date'
+        $validator = Validator::make($request->all(), [
+            // Limit validation to updatable fields
+            'payment_id' => 'nullable|exists:payments,id', // Allow optional update
+            'items' => 'nullable|array', // Allow optional update
+            'items.*.product_id' => 'required_if:items,.*|exists:products,id', // Required if items array exists
+            'items.*.amount' => 'required_if:items,.*|integer', // Required if items array exists
         ]);
     
-        $order->update($validatedData);
-        return response()->json($order, Response::HTTP_OK);
+        $order = Orders::findOrFail($order_id);
+    
+        if ($request->has('payment_id')) {
+            $order->payment_id = $request->input('payment_id');
+        }
+    
+        // Process order items if provided
+        if ($request->has('items')) {
+            $orderItems = $order->orderItems;
+
+            $order->orderItems()->delete();
+    
+            $updatedItems = [];
+            foreach ($request->input('items') as $item) {
+                $updatedItems[] = [
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'amount' => $item['amount'],
+                ];
+            }
+    
+            $order->orderItems()->createMany($updatedItems);
+        }
+    
+        $order->save();
+    
+        return response()->json($order, Response::HTTP_CREATED);
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
+    public function deleteOrder($id)
     {
         $order = Orders::findOrFail($id);
 
