@@ -31,7 +31,10 @@ class UsersController extends Controller
     }
 
     public function update(Request $request, $id){
-        $validator = Validator::make($request->all(), [
+
+        $user = User::findOrFail($id);
+
+        $request->validate([
             'name' => 'required|min:2|max:100',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|max:30',
@@ -42,26 +45,8 @@ class UsersController extends Controller
             'admin' => 'required|boolean'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message'=>'Validations fails',
-                'errors'=>$validator->errors()
-            ], 422);
-        }
-        else{
-            $user = User::where('id', $id)->get();
-
-            $user=User::update([
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'password'=>Hash::make($request->password),
-                'address'=>$request->address,
-                'city'=>$request->city,
-                'postal_code'=>$request->postal_code,
-                'phone'=>$request->phone,
-                'admin'=>$request->admin
-            ]);
-        }
+        $user->update($request->all());
+        return response()->json($user, Response::HTTP_OK);
     }
 
     public function destroy($id)
