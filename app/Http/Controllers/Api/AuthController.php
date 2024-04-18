@@ -87,11 +87,23 @@ class AuthController extends Controller
 
     public function profile(Request $request)
     {
-        if (Auth::check()) {
-            return response()->json([
-                'message' => 'User successfully fetched',
-                'data' => $request->user()
-            ], 200);
+      if (Auth::check()) {
+        $user = $request->user();
+    
+        // Select only the desired user fields
+        $filteredUser = [
+          'name' => $user->name,
+          'email' => $user->email,
+          'address' => $user->address,
+          'city' => $user->city,
+          'postal_code' => $user->postal_code,
+          'phone' => $user->phone,
+        ];
+    
+        return response()->json([
+          'message' => 'User successfully fetched',
+          'data' => $filteredUser
+        ], 200);
         } else {
             return response()->json([
                 'message' => 'Unauthorized access',
