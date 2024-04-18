@@ -4,7 +4,7 @@ import { CartService } from '../cart.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-
+ 
 export interface Product {
   id:number;
   category_id: number;
@@ -64,12 +64,25 @@ export class ProductsComponent implements OnInit {
       .subscribe({
         next: (data) => {
           console.log('Termék sikeresen hozzáadva!', data);
+          // Frissítés a products tömbben a hozzáadott termékkel
+          this.products.push(data);
+          // Reset the newProduct object for the form
+          this.newProduct = {
+            id: 0,
+            category_id: 0,
+            brand_id: 0,
+            name: '',
+            cost: 0,
+            amount: 0,
+            description: '',
+          };
         },
         error: (err) => {
           console.error('Hiba a termék hozzáadása közben:', err);
         },
       });
   }
+  
 
   onDeleteProduct(product: Product): void {
     const url = `${this.api.host}/${product.id}`;
@@ -78,12 +91,15 @@ export class ProductsComponent implements OnInit {
       .subscribe({
         next: () => {
           console.log('Termék sikeresen törölve!');
+          // Termék törlése a products tömbből
+          this.products = this.products.filter((p: Product) => p.id !== product.id);
         },
         error: (err) => {
           console.error('Hiba a termék törlése közben:', err);
         },
       });
   }
+  
 
   editProduct(product: Product): void {
     this.api.setSelectedProduct(product);

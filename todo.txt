@@ -3,11 +3,11 @@ Felhasználó nem tudja updatelni az adatait
 Kosárból rendelés után kiüríteni                                                               PIPA
 A rendeléseimet módosítani, törölni
 Adminként a termékek tabból módosítani is                                                       PIPA
-termék törlés után frissítse az oldalt
+termék törlés után frissítse az oldalt                                                          PIPA
 Csak authentikált felhasználó tudjon temréket felvenni
 Admin az összes usert tudja módosítani, törölni
 
 
 
-updatelni terméket, árat adminként
-profilon át tudjuk írni az árát
+updatelni terméket, árat adminként                  						PIPA	
+profilon át tudjuk írni az adatokat         							
