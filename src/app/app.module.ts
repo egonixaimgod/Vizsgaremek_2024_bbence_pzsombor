@@ -18,6 +18,7 @@ import { ChooseComponent } from './choose/choose.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     ProfileComponent,
     MyordersComponent,
     ProductEditComponent,
+    ProfileEditComponent,
   ],
   imports: [
     BrowserModule,

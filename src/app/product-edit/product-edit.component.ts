@@ -1,45 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../product.service';
+import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { BaseService } from '../base.service';
+import { HttpClient } from '@angular/common/http';
+
+export interface Product {
+  id:number;
+  category_id: number;
+  brand_id: number;
+  name: string;
+  cost: number;
+  amount: number;
+  description: string;
+}
 
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css']
 })
-export class ProductEditComponent implements OnInit {
-  productId: number = 1;
-  product: any = {}; 
 
-  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
+export class ProductEditComponent implements OnInit {
+  editedProduct!: Product;
+
+  constructor(private api: BaseService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    // Az URL-ből kinyerjük a termék azonosítóját
-    this.productId = +this.route.snapshot.paramMap.get('id');
-    // Betöltjük a termék adatait
-    this.loadProduct();
+    this.editedProduct = { ...this.api.getSelectedProduct() };
   }
 
-  loadProduct(): void {
-    // Itt betöltjük a termék adatait a termék szolgáltatás segítségével
-    // A productService-nek meg kell valósítania egy olyan metódust, ami betölti a termék adatait az adatbázisból
-    this.productService.getProductById(this.productId).subscribe((product: any) => {
-      this.product = product;
-    });
-  }
-
-  saveProduct(): void {
-    // Itt mentjük el a módosított termék adatait a termék szolgáltatás segítségével
-    // A productService-nek meg kell valósítania egy olyan metódust, ami elmenti a módosított termék adatait az adatbázisba
-    this.productService.updateProduct(this.productId, this.product).subscribe(() => {
-      console.log('Termék sikeresen frissítve!');
-      // Visszairányítás a termék listához
-      this.router.navigate(['/products']);
-    });
-  }
-
-  goBack(): void {
-    // Visszairányítás a termék listához
-    this.router.navigate(['/products']);
+  updateProduct(): void {
+    this.http.put<any>(`${this.api.host}/${this.editedProduct.id}`, this.editedProduct)
+      .subscribe({
+        next: (data) => {
+          console.log('Termék sikeresen frissítve!', data);
+          alert("Termék sikeresen frissítve!");
+        },
+        error: (err) => {
+          console.error('Hiba a termék frissítése közben:', err);
+          alert('Hiba a termék frissítése közben:');
+        },
+      });
   }
 }

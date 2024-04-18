@@ -1,40 +1,78 @@
 <div class="container py-5 px-5" style="max-width: 30rem;">
     <h1>Regisztráció</h1>
-    <div class="py-2">
-        <label for="name" class="form-label">Név</label>
-        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="userData.name">
-    </div>
-    <div class="py-2">
-        <label for="email" class="form-label">Email cím</label>
-        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="userData.email">
-    </div>
-    <div class="py-2">
-        <label for="password" class="form-label">Jelszó</label>
-        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="userData.password">
-    </div>
-    <div class="py-2">
-        <label for="confirmPassword" class="form-label">Jelszó újra</label>
-        <input type="password" class="form-control" id="confirmPassword" name="confirm_password"
-            [(ngModel)]="userData.confirm_password">
-    </div>
-    <div class="py-2">
-        <label for="address" class="form-label">Cím</label>
-        <input type="text" class="form-control" id="address" name="address" [(ngModel)]="userData.address">
-    </div>
-    <div class="py-2">
-        <label for="city" class="form-label">Város</label>
-        <input type="text" class="form-control" id="city" name="city" [(ngModel)]="userData.city">
-    </div>
-    <div class="py-2">
-        <label for="postal_code" class="form-label">Irányítószám</label>
-        <input type="text" class="form-control" id="postal_code" name="postal_code" [(ngModel)]="userData.postal_code">
-    </div>
-    <div class="py-2">
-        <label for="phone" class="form-label">Telefonszám</label>
-        <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="userData.phone">
-    </div>
-
+    <form #signupForm="ngForm">
+        <div class="py-2">
+            <label for="name" class="form-label">Név</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="userData.name" required minlength="2" maxlength="100">
+            <div *ngIf="signupForm.controls['name']?.invalid && (signupForm.controls['name']?.dirty || signupForm.controls['name']?.touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['name']?.errors?.['required']">A név megadása kötelező.</div>
+                <div *ngIf="signupForm.controls['name']?.errors?.['minlength']">A név legalább 2 karakter hosszú legyen.</div>
+                <div *ngIf="signupForm.controls['name']?.errors?.['maxlength']">A név maximum 100 karakter hosszú lehet.</div>
+            </div>
+        </div>
+        <div class="py-2">
+            <label for="email" class="form-label">Email cím</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="userData.email" required email>
+            <div *ngIf="signupForm.controls['email']?.invalid && (signupForm.controls['email']?.dirty || signupForm.controls['email']?.touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['email']?.errors?.['required']">Az email cím megadása kötelező.</div>
+                <div *ngIf="signupForm.controls['email']?.errors?.['email']">Helytelen email formátum.</div>
+            </div>
+        </div>
+        <div class="py-2">
+            <label for="password" class="form-label">Jelszó</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="userData.password" required minlength="6" maxlength="30">
+            <div *ngIf="signupForm.controls['password']?.invalid && (signupForm.controls['password']?.dirty || signupForm.controls['password']?.touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['password']?.errors?.['required']">A jelszó megadása kötelező.</div>
+                <div *ngIf="signupForm.controls['password']?.errors?.['minlength']">A jelszó legalább 6 karakter hosszú legyen.</div>
+                <div *ngIf="signupForm.controls['password']?.errors?.['maxlength']">A jelszó maximum 30 karakter hosszú lehet.</div>
+            </div>
+        </div>
+        <div class="py-2">
+            <label for="confirmPassword" class="form-label">Jelszó újra</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" [(ngModel)]="userData.confirm_password" required compareWith="userData.password">
+            <div *ngIf="signupForm.controls['confirm_password']?.invalid && (signupForm.controls['confirm_password']?.dirty || signupForm.controls['confirm_password']?.touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['confirm_password']?.errors?.['required']">A jelszó újbóli megadása kötelező.</div>
+                <div *ngIf="signupForm.controls['confirm_password']?.errors?.['compareWith']">A két jelszó nem egyezik.</div>
+            </div>
+        </div>
+        <div class="py-2">
+            <label for="address" class="form-label">Cím</label>
+            <input type="text" class="form-control" id="address" name="address" [(ngModel)]="userData.address" required minlength="5" maxlength="100">
+            <div *ngIf="signupForm.controls['address']?.invalid && (signupForm.controls['address']?.dirty || signupForm.controls['address']?.touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['address']?.errors?.['required']">A cím megadása kötelező.</div>
+                <div *ngIf="signupForm.controls['address']?.errors?.['minlength']">A cím legalább 5 karakter hosszú legyen.</div>
+                <div *ngIf="signupForm.controls['address']?.errors?.['maxlength']">A cím maximum 100 karakter hosszú lehet.</div>
+            </div>
+        </div>
+        <div class="py-2">
+            <label for="city" class="form-label">Város</label>
+            <input type="text" class="form-control" id="city" name="city" [(ngModel)]="userData.city" required minlength="2" maxlength="50">
+            <div *ngIf="signupForm.controls['city']?.invalid && (signupForm.controls['city']?.dirty || signupForm.controls['city']?.touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['city']?.errors?.['required']">A város megadása kötelező.</div>
+                <div *ngIf="signupForm.controls['city']?.errors?.['minlength']">A város legalább 2 karakter hosszú legyen.</div>
+                <div *ngIf="signupForm.controls['city']?.errors?.['maxlength']">A város maximum 50 karakter hosszú lehet.</div>
+            </div>
+        </div>
+        <div class="py-2">
+            <label for="postal_code" class="form-label">Irányítószám</label>
+            <input type="text" class="form-control" id="postal_code" name="postal_code" [(ngModel)]="userData.postal_code" required minlength="4" maxlength="4">
+            <div *ngIf="signupForm.controls['postal_code']?.invalid && (signupForm.controls['postal_code']?.dirty || signupForm.controls['postal_code']?.touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['postal_code']?.errors?.['required']">Az irányítószám megadása kötelező.</div>
+                <div *ngIf="signupForm.controls['postal_code']?.errors?.['minlength']">Az irányítószám legalább 4 karakter hosszú legyen.</div>
+                <div *ngIf="signupForm.controls['postal_code']?.errors?.['maxlength']">Az irányítószám maximum 4 karakter hosszú lehet.</div>
+            </div>
+        </div>
+        <div class="py-2">
+            <label for="phone" class="form-label">Telefonszám</label>
+            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="userData.phone" required minlength="3" maxlength="12">
+            <div *ngIf="signupForm.controls['phone']?.invalid && (signupForm.controls['phone']?.dirty || signupForm.controls['phone']?.touched)" class="text-danger">
+                <div *ngIf="signupForm.controls['phone']?.errors?.['required']">A telefonszám megadása kötelező.</div>
+                <div *ngIf="signupForm.controls['phone']?.errors?.['minlength']">A telefonszám legalább 3 karakter hosszú legyen.</div>
+                <div *ngIf="signupForm.controls['phone']?.errors?.['maxlength']">A telefonszám maximum 12 karakter hosszú lehet.</div>
+            </div>
+        </div>
+    </form>
     <div style="text-align: right;">
-        <button type="submit" class="btn btn-warning" routerLink="/login" (click)="register()">Tovább</button>
+        <button type="submit" class="btn btn-warning" (click)="register()">Tovább</button>
     </div>
 </div>

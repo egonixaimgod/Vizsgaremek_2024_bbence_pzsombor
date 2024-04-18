@@ -23,5 +23,10 @@ export class CartService {
   removeFromCart(index: number): void {
     this.cartItems.splice(index, 1);
   }
+
+  clearCart(): void {
+    this.cartItems = [];
+  }
+  
 }
 

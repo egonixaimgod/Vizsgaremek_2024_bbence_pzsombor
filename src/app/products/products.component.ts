@@ -3,6 +3,7 @@ import { BaseService } from '../base.service';
 import { CartService } from '../cart.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 export interface Product {
   id:number;
@@ -32,7 +33,7 @@ export class ProductsComponent implements OnInit {
     description: '',
   };
 
-  constructor(private api: BaseService, private cartService: CartService, private http: HttpClient, public AuthService: AuthService) { }
+  constructor(private api: BaseService, private cartService: CartService, private http: HttpClient, public AuthService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -82,6 +83,10 @@ export class ProductsComponent implements OnInit {
           console.error('Hiba a termék törlése közben:', err);
         },
       });
+  }
+
+  editProduct(product: Product): void {
+    this.api.setSelectedProduct(product);
   }
 
 }

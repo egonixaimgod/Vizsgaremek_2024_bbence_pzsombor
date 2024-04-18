@@ -10,16 +10,17 @@
                 <img [src]="generateImagePath(product.name)" class="card-img-bottom" alt="" style="min-height: 24.380rem;">
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <input type="number" min="1" [(ngModel)]="quantities[i]" style="width: 4rem;">
-                    <button class="btn btn-danger" (click)="onDeleteProduct(product)" *ngIf="AuthService.isAdmin">Töröl</button>
-                    <button class="btn btn-warning btn-right" (click)="onAddToCart(product, quantities[i])"
-                        routerLink="/cart">Rendeld meg!</button>
+                    <button class="btn btn-danger btn-sm" (click)="onDeleteProduct(product)" *ngIf="AuthService.isAdmin">Töröl</button>
+                    <button class="btn btn-warning btn-sm" (click)="onAddToCart(product, quantities[i])"routerLink="/cart">Rendeld meg!</button>
+                    <button class="btn btn-primary btn-sm" (click)="editProduct(product)" *ngIf="AuthService.isAdmin" routerLink="/product-edit">Szerkesztés</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<form #productForm="ngForm" (ngSubmit)="addProduct()" class="container py-5 px-5" *ngIf="AuthService.isAdmin">
+<div class="container pt-5 px-5" style="font-size: 50px; text-shadow: 0.15rem 0.15rem lightgrey; text-align: center;"  *ngIf="AuthService.isAdmin">Termék Hozzáadása</div>
+<form #productForm="ngForm" (ngSubmit)="addProduct()" class="container py-5 px-5" *ngIf="AuthService.isAdmin" style="max-width: 30rem;">
     <div class="form-group">
       <label for="category_id">Kategória ID:</label>
       <input type="number" class="form-control" id="category_id" name="category_id" [(ngModel)]="newProduct.category_id" required>

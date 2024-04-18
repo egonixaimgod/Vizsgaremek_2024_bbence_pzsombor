@@ -32,23 +32,26 @@ export class ChooseComponent {
 
   order() {
     const azonosito = Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000;
-
+  
     this.userData.azonosito = azonosito;
-
+  
     const cartItems = this.CartService.getCartItems();
-
+  
     this.userData.items = cartItems.map(item => {
       return {
         product_id: item.id,
         amount: item.amount
       };
     });
-
-    if (this.AuthService.isLoggedIn == true) {
-      this.OrderService.order(this.userData);
+  
+    if (this.AuthService.isLoggedIn) {
+      this.OrderService.order(this.userData).subscribe((success: boolean) => {
+        if (success) {
+          this.CartService.clearCart(); // Ha a rendelés sikeres volt, töröljük a kosár tartalmát
+        }
+      });
     } else {
       alert("Kérjük jelentkezzen be!");
     }
   }
-
 }
