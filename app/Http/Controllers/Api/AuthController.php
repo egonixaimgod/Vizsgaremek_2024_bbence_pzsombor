@@ -131,8 +131,8 @@ class AuthController extends Controller
             'email' => 'email|unique:users,email,' . $userId, // Unique email check
             'address' => 'string|max:255', // Make address optional
             'city' => 'string|max:255', // Make city optional
-            'postal_code' => 'string|max:255', // Make postal code optional
-            'phone' => 'string|max:255', // Make phone number optional
+            'postal_code' => 'integer|min:4|max:4', // Make postal code optional
+            'phone' => 'integer|min:3|max:12', // Make phone number optional
         ];
     
         $validator = Validator::make($request->all(), $rules);
