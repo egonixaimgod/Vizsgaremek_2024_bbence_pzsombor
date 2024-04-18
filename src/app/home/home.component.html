@@ -56,7 +56,7 @@
                         <h5 class="card-text">Ár: {{product.cost}} Ft
                         </h5>
                     </div>
-                    <img [src]="generateImagePath(product.name)" class="card-img-bottom" alt="AMD Ryzen 5 5600X"
+                    <img [src]="(product.img)" class="card-img-bottom" alt="AMD Ryzen 5 5600X"
                         style="">
                     <div class="card-footer">
                         <a class="btn btn-warning" (click)="onAddToCart(product)" routerLink="/cart">Rendeld meg!</a>

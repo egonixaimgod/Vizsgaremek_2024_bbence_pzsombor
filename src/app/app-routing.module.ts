@@ -10,6 +10,7 @@ import { ChooseComponent } from './choose/choose.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'orders', component: MyordersComponent },
   { path: 'product-edit', component: ProductEditComponent},
+  { path: 'profile-edit', component: ProfileEditComponent},
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@
                     <h5 class="card-text" *ngIf="AuthService.isAdmin">Brand_id: {{product.brand_id}} </h5>
                     <h5 class="card-text" *ngIf="AuthService.isAdmin">Amount: {{product.amount}} </h5>
                 </div>
-                <img [src]="generateImagePath(product.name)" class="card-img-bottom" alt="" style="min-height: 24.380rem;">
+                <img [src]="(product.img)" class="card-img-bottom" alt="" style="min-height: 24.380rem;">
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <input type="number" min="1" [(ngModel)]="quantities[i]" style="width: 4rem;">
                     <button class="btn btn-danger btn-sm" (click)="onDeleteProduct(product)" *ngIf="AuthService.isAdmin">Töröl</button>
@@ -48,6 +48,10 @@
     <div class="form-group pt-2">
       <label for="description">Leírás:</label>
       <textarea class="form-control" id="description" name="description" [(ngModel)]="newProduct.description" required></textarea>
+    </div>
+    <div class="form-group pt-2">
+      <label for="img">Mennyiség:</label>
+      <input type="text" class="form-control" id="img" name="img" [(ngModel)]="newProduct.img" required>
     </div>
     <button type="submit" class="btn btn-primary mt-2" [disabled]="productForm.invalid">Termék hozzáadása</button>
   </form>

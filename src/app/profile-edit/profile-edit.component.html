@@ -1,1 +1,27 @@
-<p>profile-edit works!</p>
+<form class="container py-5 px-5" style="max-width: 30rem;">
+    <div class="form-group py-2">
+        <label for="name">Név:</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="editedProfile.name" required>
+    </div>
+    <div class="form-group py-2">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="editedProfile.email" required>
+    </div>
+    <div class="form-group py-2">
+        <label for="address">Cím:</label>
+        <input type="text" class="form-control" id="address" name="address" [(ngModel)]="editedProfile.address" required>
+    </div>
+    <div class="form-group py-2">
+        <label for="city">Város:</label>
+        <input type="text" class="form-control" id="city" name="city" [(ngModel)]="editedProfile.city" required>
+    </div>
+    <div class="form-group py-2">
+        <label for="postal_code">Irányítószám:</label>
+        <input type="text" class="form-control" id="postal_code" name="postal_code" [(ngModel)]="editedProfile.postal_code" required>
+    </div>
+    <div class="form-group py-2">
+        <label for="phone">Telefonszám:</label>
+        <input type="tel" class="form-control" id="phone" name="phone" [(ngModel)]="editedProfile.phone" required>
+    </div>
+    <button type="submit" class="btn btn-primary my-2" (click)="updateProfile()">Mentés</button>
+</form>

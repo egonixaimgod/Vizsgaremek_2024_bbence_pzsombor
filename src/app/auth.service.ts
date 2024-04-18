@@ -57,4 +57,13 @@ export class AuthService {
     };
     return this.http.delete('http://127.0.0.1:8000/api/auth/deleteProfile', httpOptions);
   }
+
+  getProfile() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      })
+    };
+    return this.http.get<any>('http://127.0.0.1:8000/api/auth/profile', httpOptions);
+  }
 }

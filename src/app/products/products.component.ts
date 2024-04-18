@@ -13,6 +13,7 @@
     cost: number;
     amount: number;
     description: string;
+    img: string;
   }
 
   @Component({
@@ -31,6 +32,7 @@
       cost: 0,
       amount: 0,
       description: '',
+      img: '',
     };
 
     constructor(private api: BaseService, private cartService: CartService, private http: HttpClient, public AuthService: AuthService, private router: Router) { }
@@ -90,6 +92,7 @@
               cost: 0,
               amount: 0,
               description: '',
+              img: '',
             };
           },
           error: (err) => {
