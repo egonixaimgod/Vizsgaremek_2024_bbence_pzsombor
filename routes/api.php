@@ -51,8 +51,8 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     //users
     Route::get('/users', [UsersController::class, 'index']);
     Route::get('/users/{id}', [UsersController::class, 'show']);
-    Route::put('/updateUser/{id}', [UsersController::class, 'update']);
-    Route::delete('/deleteUser/{id}', [UsersController::class, 'destroy']);
+    Route::put('/users/{id}', [UsersController::class, 'update']);
+    Route::delete('/users/{id}', [UsersController::class, 'destroy']);
 });
 
 //user végpontok
@@ -79,8 +79,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/orders/{id}', [OrdersController::class, 'update']);
     Route::delete('/orders/{id}', [OrdersController::class, 'destroy']);
     //users
-    Route::put('/users/{id}', [UsersController::class, 'update']);
-    Route::delete('/users/{id}', [UsersController::class, 'destroy']);
+    Route::put('/updateUser/{id}', [UsersController::class, 'update']);
+    Route::delete('/deleteUser/{id}', [UsersController::class, 'destroy']);
 });
 
 //auth nélküli végpontok
