@@ -50,4 +50,35 @@ export class MyordersComponent implements OnInit {
       }
     });
   }
+
+  getPaymentMethod(paymentId: number): string {
+    switch (paymentId) {
+      case 1:
+        return 'Futárszolgálat';
+      case 2:
+        return 'Átvétel üzletünkben';
+      default:
+        return 'Ismeretlen fizetési mód';
+    }
+  }
+  
+  getProductName(productId: number): string {
+    switch (productId) {
+      case 1:
+        return 'i7-11700k';
+      case 2:
+        return 'Ryzen 5 5600x';
+      case 3:
+        return '16GB DDR4 3200MHz CL16 Trident Z RGB';
+      case 4:
+        return '16GB DDR4 3733MHz Kit Aorus RGB';
+      case 5:
+        return 'B550 Gaming X V2';
+      case 6:
+        return 'MSI MPG Z590 GAMING PLUS';
+      default:
+        return 'Ismeretlen termék';
+    }
+  }
+  
 }
