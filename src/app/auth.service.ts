@@ -10,7 +10,18 @@ export class AuthService {
   public userData: any = {};
   public token: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.checkLoggedInStatus();
+  }
+
+  checkLoggedInStatus() {
+    const storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+      this.userData = JSON.parse(storedUserData);
+      this.isLoggedIn = true;
+      this.token = this.userData.token;
+    }
+  }
 
   login(userData: any) {
     this.http.post('http://127.0.0.1:8000/api/auth/login', userData).subscribe(
@@ -21,8 +32,9 @@ export class AuthService {
           this.isLoggedIn = true;
           this.userData = response;
           this.token = response.token;
+          localStorage.setItem('userData', JSON.stringify(this.userData)); // Autentikációs adatok mentése localstorage-ba
           console.log(this.token);
-
+  
           if (this.userData.data.admin == 1) {
             this.isAdmin = true;
           } else {
@@ -65,5 +77,12 @@ export class AuthService {
       })
     };
     return this.http.get<any>('http://127.0.0.1:8000/api/auth/profile', httpOptions);
+  }
+
+  logout(): void {
+    this.isLoggedIn = false;
+    this.isAdmin = false;
+    this.userData = {};
+    localStorage.removeItem('userData');
   }
 }

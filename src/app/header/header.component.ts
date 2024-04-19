@@ -9,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   constructor(public authService: AuthService, private router: Router) {}
-  onLogout(): void {
-    this.authService.isLoggedIn = false;
-    this.authService.userData = {};
-    location.replace("/home") 
-  }
+  onLogout(event: MouseEvent): void {
+    event.preventDefault(); // Az esemény alapértelmezett működésének megakadályozása (navigáció)
+    this.authService.logout();
+    this.router.navigate(['/home']); // Az átirányítás a '/home' útvonalra
+}
+
+
+
 }

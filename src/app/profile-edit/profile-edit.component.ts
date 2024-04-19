@@ -3,7 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 export interface UserProfile {
   id: number;
@@ -55,8 +55,9 @@ export class ProfileEditComponent implements OnInit {
       .subscribe({
         next: (data) => {
           console.log('Profil sikeresen frissítve!', data);
-          alert("Profil sikeresen frissítve!");
-          this.router.navigate(['/profile']);
+          alert("Profil sikeresen frissítve, kérjük jelentkezzen be újra!");
+          this.authService.logout();
+          this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Hiba a profil frissítése közben:', err);

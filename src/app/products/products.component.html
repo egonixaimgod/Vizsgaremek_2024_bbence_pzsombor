@@ -8,7 +8,7 @@
                     <h5 class="card-text" *ngIf="AuthService.isAdmin">Id: {{product.id}} </h5>
                     <h5 class="card-text" *ngIf="AuthService.isAdmin">Category_id: {{product.category_id}} </h5>
                     <h5 class="card-text" *ngIf="AuthService.isAdmin">Brand_id: {{product.brand_id}} </h5>
-                    <h5 class="card-text" *ngIf="AuthService.isAdmin">Amount: {{product.amount}} </h5>
+                    
                 </div>
                 <img [src]="(product.img)" class="card-img-bottom" alt="" style="min-height: 24.380rem;">
                 <div class="card-footer d-flex justify-content-between align-items-center">
@@ -50,7 +50,7 @@
       <textarea class="form-control" id="description" name="description" [(ngModel)]="newProduct.description" required></textarea>
     </div>
     <div class="form-group pt-2">
-      <label for="img">Mennyiség:</label>
+      <label for="img">Kép-url:</label>
       <input type="text" class="form-control" id="img" name="img" [(ngModel)]="newProduct.img" required>
     </div>
     <button type="submit" class="btn btn-primary mt-2" [disabled]="productForm.invalid">Termék hozzáadása</button>
