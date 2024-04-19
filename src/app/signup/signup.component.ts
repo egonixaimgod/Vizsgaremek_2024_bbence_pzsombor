@@ -34,7 +34,7 @@ export class SignupComponent {
       .subscribe((response) => {
         console.log('Regisztráció sikeres:', response);
         alert("Gratulálok! Sikeres regisztráció!");
-        this.router.navigate(['/login']); // Továbbnavigálás a bejelentkezési oldalra
+        this.router.navigate(['/login']); 
       }, (error) => {
         console.error('Regisztráció sikertelen:', error);
         alert("Sajnos hibás regisztráció, ellenőrizd az adataid!");

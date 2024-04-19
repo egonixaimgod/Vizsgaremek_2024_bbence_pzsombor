@@ -1,16 +1,16 @@
 Regisztrációnál ha üresen hagyok valamit, akkor írja ki, hogy töltsem ki a mezőt.               PIPA
-Felhasználó nem tudja updatelni az adatait                                                      -
+Felhasználó nem tudja updatelni az adatait                                                      PIPA
 Kosárból rendelés után kiüríteni                                     			                PIPA
-A rendeléseimet módosítani, törölni                                                             -
+A rendeléseimet módosítani, törölni                                                             FÉLIG PIPA
 Adminként a termékek tabból módosítani is                                                       PIPA
 termék törlés után frissítse az oldalt                                                          PIPA
-Csak authentikált felhasználó tudjon temréket felvenni						                    -
+Csak authentikált felhasználó tudjon temréket felvenni						                    PIPA
 Admin az összes usert tudja módosítani, törölni							                        -
 adminként ne lehessen rendelni            							                            PIPA
 
 
 updatelni terméket, árat adminként                  						PIPA	
-profilon át tudjuk írni az adatokat								            -         							
+profilon át tudjuk írni az adatokat								  PIPA          -         							
 
 
-a product editnél meg kell adni, hogy miből mennyi lehet, illetve a profile editnel is!
+a product editnél meg kell adni, hogy miből mennyi lehet, illetve a profile editnel is!              -

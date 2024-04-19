@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'; // Importáljuk HttpHeaders-t
+import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthService {
   public userData: any = {};
   public token: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.checkLoggedInStatus();
   }
 
@@ -32,7 +33,7 @@ export class AuthService {
           this.isLoggedIn = true;
           this.userData = response;
           this.token = response.token;
-          localStorage.setItem('userData', JSON.stringify(this.userData)); // Autentikációs adatok mentése localstorage-ba
+          localStorage.setItem('userData', JSON.stringify(this.userData)); 
           console.log(this.token);
   
           if (this.userData.data.admin == 1) {
@@ -84,5 +85,16 @@ export class AuthService {
     this.isAdmin = false;
     this.userData = {};
     localStorage.removeItem('userData');
+  }
+
+  reloadAndNavigate(): void {
+    
+    window.location.reload();
+    
+    
+    setTimeout(() => {
+      
+      this.router.navigateByUrl('/home');
+    }, 2000); 
   }
 }

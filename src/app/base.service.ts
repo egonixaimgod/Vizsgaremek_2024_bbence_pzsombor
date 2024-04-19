@@ -24,11 +24,11 @@ export class BaseService {
     return this.http.get<any>(this.host);
   }
 
-  setSelectedProduct(product: Product): void { // Új metódus hozzáadása
+  setSelectedProduct(product: Product): void { 
     this.selectedProduct = product;
   }
 
-  getSelectedProduct(): Product { // Új metódus hozzáadása
+  getSelectedProduct(): Product { 
     return this.selectedProduct;
   }
 }

@@ -28,13 +28,13 @@ export class OrderService {
         console.log('A rendelés sikeres:', response);
         alert("A rendelés sikeres!");
         this.userData = response;
-        return true; // Visszatérünk a rendelés sikerességével
+        return true; 
       }),
       catchError((error: any) => {
         console.error('A rendelés sikertelen:', error);
         alert("A rendelés sikertelen!");
         this.userData = {};
-        return of(false); // Visszatérünk a rendelés sikertelenségével
+        return of(false);
       })
     );
   }

@@ -80,5 +80,21 @@ export class MyordersComponent implements OnInit {
         return 'Ismeretlen termék';
     }
   }
-  
+  deleteOrderItem(orderId: number): void {
+    if (confirm('Biztosan törölni szeretné ezt a terméket a rendelésből?')) {
+        this.myordersitemsservice.deleteOrderItem(orderId).subscribe({
+            next: (response: any) => {
+                
+                this.loadOrders1();
+                console.log('A termék sikeresen törölve a rendelésből:', response);
+                alert("Sikeresen törölte a rendelését!");
+            },
+            error: (error: any) => {
+                console.error('Hiba történt a termék törlése közben:', error);
+                alert("Sajnos valami hiba lépett fel!")
+            }
+        });
+    }
+}
+
 }

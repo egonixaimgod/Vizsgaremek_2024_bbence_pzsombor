@@ -81,9 +81,9 @@
         .subscribe({
           next: (data) => {
             console.log('Termék sikeresen hozzáadva!', data);
-            // Frissítés a products tömbben a hozzáadott termékkel
+            
             this.products.push(data);
-            // Reset the newProduct object for the form
+            
             this.newProduct = {
               id: 0,
               category_id: 0,
@@ -114,7 +114,7 @@
         .subscribe({
           next: () => {
             console.log('Termék sikeresen törölve!');
-            // Termék törlése a products tömbből
+            
             this.products = this.products.filter((p: Product) => p.id !== product.id);
           },
           error: (err) => {

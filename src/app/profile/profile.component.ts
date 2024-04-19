@@ -36,7 +36,8 @@ export class ProfileComponent {
           next: (response: any) => {
             console.log('Profil törlése sikeres:', response);
             alert("A profil törlése sikeres!");
-            // Ide írhatod a további teendőket, pl. visszairányítás, stb.
+            this.authservice.reloadAndNavigate();
+            this.authservice.logout();
           },
           error: (error: any) => {
             console.error('Profil törlése sikertelen:', error);

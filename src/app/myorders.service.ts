@@ -1,9 +1,8 @@
-// order.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AuthService } from './auth.service'; // AuthService importálása
+import { AuthService } from './auth.service'; 
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class MyordersService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.authService.token}` // Bearer token hozzáadása
+        'Authorization': `Bearer ${this.authService.token}` 
       })
     };
 
@@ -28,10 +27,10 @@ export class MyordersService {
       }),
       catchError((error: any) => {
         console.error('A rendelések lekérése sikertelen:', error);
-        return of([]); // Üres tömb visszaadása hibás esetben
+        return of([]); 
       })
     );
   }
 
-  // További metódusok implementálása itt
+ 
 }

@@ -29,13 +29,13 @@ export class ProductEditComponent implements OnInit {
   }
 
   updateProduct(): void {
-    const httpOptions = { // Definiáljuk a httpOptions objektumot
+    const httpOptions = { 
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.authService.token}`
       })
     };
 
-    this.http.put<any>(`${this.api.host}/${this.editedProduct.id}`, this.editedProduct, httpOptions) // Adjuk hozzá a httpOptions objektumot a put kéréshez
+    this.http.put<any>(`${this.api.host}/${this.editedProduct.id}`, this.editedProduct, httpOptions)
       .subscribe({
         next: (data) => {
           console.log('Termék sikeresen frissítve!', data);
