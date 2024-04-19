@@ -28,7 +28,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 //authenticált végpontok
 //admin végpontok
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
@@ -54,9 +53,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/users/{id}', [UsersController::class, 'show']);
     Route::put('/updateUser/{id}', [UsersController::class, 'update']);
     Route::delete('/deleteUser/{id}', [UsersController::class, 'destroy']);
-
 });
-
 
 //user végpontok
 //
@@ -84,8 +81,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //users
     Route::put('/users/{id}', [UsersController::class, 'update']);
     Route::delete('/users/{id}', [UsersController::class, 'destroy']);
-    });
-
+});
 
 //auth nélküli végpontok
 //auth
@@ -107,5 +103,3 @@ Route::get('/payment/{id}', [PaymentController::class, 'show']);
 //products
 Route::get('/products', [ProductsController::class, 'index']);
 Route::get('/products/{id}', [ProductsController::class, 'show']);
-
-
