@@ -11,3 +11,6 @@ adminként ne lehessen rendelni            							                            PI
 
 updatelni terméket, árat adminként                  						PIPA	
 profilon át tudjuk írni az adatokat								            -         							
+
+
+a product editnél meg kell adni, hogy miből mennyi lehet, illetve a profile editnel is!

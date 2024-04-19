@@ -14,25 +14,7 @@ export class OrderService {
 
   constructor(private http: HttpClient, public authService: AuthService) { }
 
-  getOrders(): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.authService.token}`
-      })
-    };
-
-    return this.http.get('http://127.0.0.1:8000/api/showOrders', httpOptions).pipe(
-      map((response: any) => {
-        console.log('A rendelések sikeresen lekérve:', response);
-        return response; // Visszatérünk a rendelésekkel
-      }),
-      catchError((error: any) => {
-        console.error('A rendelések lekérése sikertelen:', error);
-        return of([]); // Visszatérünk üres tömbbel, ha a lekérés sikertelen
-      })
-    );
-  }
+  
   
   order(userData: any): Observable<boolean> {
     const httpOptions = {
@@ -57,5 +39,24 @@ export class OrderService {
       })
     );
   }
-  
+
+  getOrders(): Observable<any[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.authService.token}` // Include access token in header
+      })
+    };
+
+    return this.http.get('http://127.0.0.1:8000/api/showOrders', httpOptions).pipe(
+      map((response: any) => {
+        console.log('A rendelések sikeresen lekérve:', response);
+        return response.orders;
+      }),
+      catchError((error: any) => {
+        console.error('A rendelések lekérése sikertelen:', error);
+        return of([]);
+      })
+    );
+  }
 }

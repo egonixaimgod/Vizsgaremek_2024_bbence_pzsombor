@@ -56,7 +56,7 @@ export class ProfileEditComponent implements OnInit {
         next: (data) => {
           console.log('Profil sikeresen frissítve!', data);
           alert("Profil sikeresen frissítve!");
-          this.reloadCurrentRoute();
+          this.router.navigate(['/profile']);
         },
         error: (err) => {
           console.error('Hiba a profil frissítése közben:', err);

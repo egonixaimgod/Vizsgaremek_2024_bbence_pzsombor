@@ -40,7 +40,7 @@ export class ProductEditComponent implements OnInit {
         next: (data) => {
           console.log('Termék sikeresen frissítve!', data);
           alert("Termék sikeresen frissítve!");
-          this.reloadCurrentRoute(); // Útvonal újratöltése
+          this.reloadCurrentRoute(); 
         },
         error: (err) => {
           console.error('Hiba a termék frissítése közben:', err);
@@ -49,7 +49,7 @@ export class ProductEditComponent implements OnInit {
       });
   }
 
-  // Útvonal újratöltése
+
   reloadCurrentRoute() {
     const currentUrl = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

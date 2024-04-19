@@ -10,7 +10,7 @@
         <p class="card-text">Irányítószám: <span *ngIf="!editing">{{ authservice.userData.data.postal_code }}</span><input *ngIf="editing" type="text" name="postal_code" [(ngModel)]="authservice.userData.data.postal_code"></p>
         <p class="card-text">Telefonszám: <span *ngIf="!editing">{{ authservice.userData.data.phone }}</span><input *ngIf="editing" type="text" name="phone" [(ngModel)]="authservice.userData.data.phone"></p>
         <button *ngIf="!editing" type="button" class="btn btn-primary" routerLink="/profile-edit">Profil szerkesztése</button>
-        <button *ngIf="editing" type="submit" class="btn btn-primary" (click)="updateProfile()">Profil frissítése</button>
+        <button *ngIf="editing" type="submit" class="btn btn-primary" routerLink="/profile" (click)="updateProfile()">Profil frissítése</button>
         <button *ngIf="authservice.isLoggedIn" type="button" class="btn btn-danger mx-3" (click)="deleteProfile()">Profil törlése</button>
       </form>
     </div>

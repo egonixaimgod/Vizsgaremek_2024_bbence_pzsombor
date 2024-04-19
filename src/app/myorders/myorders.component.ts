@@ -1,29 +1,31 @@
-// myorders.component.ts
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; // Import ChangeDetectorRef
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { OrderService } from '../order.service';
+import { Observable } from 'rxjs';
 
-@Component({ 
+@Component({
   selector: 'app-myorders',
   templateUrl: './myorders.component.html',
   styleUrls: ['./myorders.component.css']
 })
 export class MyordersComponent implements OnInit {
-  constructor(public orderService: OrderService, private cdr: ChangeDetectorRef) {} // Inject ChangeDetectorRef
+  orders$: Observable<any[]> | null = null;
+  constructor(public orderService: OrderService, private cdr: ChangeDetectorRef) { }
+
+  orders: any[] = []; 
 
   ngOnInit(): void {
-    this.loadOrders();
+    this.orders$ = this.orderService.getOrders();
   }
 
   loadOrders() {
-    this.orderService.getOrders().subscribe(
-      (orders: any) => {
-        console.log('A rendelések sikeresen lekérve:', orders); // Log orders to verify data
-        this.orderService.userData = orders.data; // Assuming orders is an object containing the data array
-        this.cdr.detectChanges(); // Manually trigger change detection
+    this.orderService.getOrders().subscribe({
+      next: (orders: any[]) => {
+        this.orders = orders; 
+        this.cdr.detectChanges(); 
       },
-      (error: any) => {
+      error: (error: any) => {
         console.error('Hiba történt a rendelések lekérése közben:', error);
       }
-    );
+    });
   }
 }

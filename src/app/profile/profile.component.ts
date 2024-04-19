@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +10,7 @@ import { AuthService } from '../auth.service';
 export class ProfileComponent {
   editing = false;
 
-  constructor(public authservice: AuthService) { }
+  constructor(public authservice: AuthService, private router: Router) { }
 
   updateProfile() {
     this.authservice.updateProfile(this.authservice.userData).subscribe(
@@ -18,6 +19,7 @@ export class ProfileComponent {
           console.log('Profil frissítése sikeres:', response);
           alert("A profil frissítése sikeres!");
           this.editing = false;
+          this.reloadCurrentRoute(); 
         },
         error: (error: any) => {
           console.error('Profil frissítése sikertelen:', error);
@@ -43,5 +45,11 @@ export class ProfileComponent {
         }
       );
     }
+  }
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }
