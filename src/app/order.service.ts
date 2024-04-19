@@ -11,9 +11,8 @@ import { Observable, of } from 'rxjs';
 export class OrderService {
   public userData: any = {}
 
-
   constructor(private http: HttpClient, public authService: AuthService) { }
-
+  private apiUrl = 'http://127.0.0.1:8000/api/'
   
   
   order(userData: any): Observable<boolean> {
@@ -36,26 +35,6 @@ export class OrderService {
         alert("A rendelés sikertelen!");
         this.userData = {};
         return of(false); // Visszatérünk a rendelés sikertelenségével
-      })
-    );
-  }
-
-  getOrders(): Observable<any[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.authService.token}` // Include access token in header
-      })
-    };
-
-    return this.http.get('http://127.0.0.1:8000/api/showOrders', httpOptions).pipe(
-      map((response: any) => {
-        console.log('A rendelések sikeresen lekérve:', response);
-        return response.orders;
-      }),
-      catchError((error: any) => {
-        console.error('A rendelések lekérése sikertelen:', error);
-        return of([]);
       })
     );
   }

@@ -1,17 +1,21 @@
+<!-- myproducts.component.html -->
 <div class="container pt-5 px-5">
-  <div class="card" style="width: 30rem;">
-    <div class="card-body">
-      <h5 class="card-title">Rendelések</h5>
-      <ul *ngFor="let order of orders$ | async">
-        <li class="list-group-item">
-          <p class="mb-1">Azonosító: {{ order.azonosito }}</p>
-          <p class="mb-1">Rendelés dátuma: {{ order.order_date }}</p>
-          <p class="mb-1">Felhasználó azonosítója: {{ order.user_id }}</p>
-          </li>
+  <div class="card" *ngIf="orders1.length > 0; else noOrders">
+    <div class="card-body" *ngFor="let order of orders1">
+      <h5 class="card-title">Rendelés: {{ order.azonosito }}</h5>
+      <p class="card-text">Felhasználó azonosítója: {{ order.user_id }}</p> 
+      <p class="card-text">Fizetési azonosító: {{ order.payment_id }}</p> 
+      <p class="card-text">Rendelés dátuma: {{ order.order_date }}</p>
+      <p class="card-text">Rendelés azonosítója: {{ order.id }}</p>
+      <p class="card-text">Rendelés tételei:</p>
+      <ul>
+        <li *ngFor="let item of order.order_items">
+          <p>Termék azonosítója: {{ item.product_id }}</p>
+          <p>Mennyiség: {{ item.amount }}</p>
+        </li>
       </ul>
     </div>
   </div>
-
   <ng-template #noOrders>
     <p>Nincsenek rendelések.</p>
   </ng-template>

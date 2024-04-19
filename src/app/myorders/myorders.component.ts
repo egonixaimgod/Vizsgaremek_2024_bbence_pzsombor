@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { OrderService } from '../order.service';
-import { Observable } from 'rxjs';
+// myproducts.component.ts
+import { Component, OnInit } from '@angular/core';
+import { MyordersService } from '../myorders.service';
 
 @Component({
   selector: 'app-myorders',
@@ -8,20 +8,19 @@ import { Observable } from 'rxjs';
   styleUrls: ['./myorders.component.css']
 })
 export class MyordersComponent implements OnInit {
-  orders$: Observable<any[]> | null = null;
-  constructor(public orderService: OrderService, private cdr: ChangeDetectorRef) { }
+  orders1: any[] = []; // Tömb az rendelések tárolására
 
-  orders: any[] = []; 
+  constructor(private myordersservice: MyordersService) { }
 
   ngOnInit(): void {
-    this.orders$ = this.orderService.getOrders();
+    this.loadOrders1();
   }
 
-  loadOrders() {
-    this.orderService.getOrders().subscribe({
+  loadOrders1() {
+    this.myordersservice.getOrders().subscribe({
       next: (orders: any[]) => {
-        this.orders = orders; 
-        this.cdr.detectChanges(); 
+        this.orders1 = orders;
+        console.log('A rendelések sikeresen lekérve:', this.orders1);
       },
       error: (error: any) => {
         console.error('Hiba történt a rendelések lekérése közben:', error);
