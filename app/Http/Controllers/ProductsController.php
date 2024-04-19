@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\Brands;
+use App\Models\Categories;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -46,6 +48,30 @@ class ProductsController extends Controller
 
         if ($product === null) {
             return response()->json(['error' => 'A Termék nem található'], 404);
+        }
+
+        return response()->json($product);
+    }
+
+    //nem működik
+    public function productsByBrand(Request $request, $brand_id)
+    {
+        $product=Products::where('brand_id',$brand_id)->get();
+
+        if ($product === null) {
+            return response()->json(['error' => 'Ilyen márkával rendelkező termék nem található'], 404);
+        }
+
+        return response()->json($product);
+    }
+
+    //nem működik
+    public function productsByCategory(Request $request, $category_id)
+    {
+        $product=Products::where('category_id',$category_id)->get();
+
+        if ($product === null) {
+            return response()->json(['error' => 'Ilyen kategóriával rendelkező termék nem található'], 404);
         }
 
         return response()->json($product);

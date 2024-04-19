@@ -102,4 +102,6 @@ Route::get('/payment/{id}', [PaymentController::class, 'show']);
 
 //products
 Route::get('/products', [ProductsController::class, 'index']);
+Route::get('/productsByBrand/{brand_id}', [ProductsController::class, 'productsByBrand']);
+Route::get('/productsByCategory/{category_id}', [ProductsController::class, 'productsByCategory']);
 Route::get('/products/{id}', [ProductsController::class, 'show']);
